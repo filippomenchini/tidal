@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 import 'package:test/test.dart';
-import 'package:tidal/src/artist/get_single_artist.dart';
+import 'package:tidal/src/artist/get_single_artist_impl.dart';
 import 'package:tidal/src/artist/tidal_artist.dart';
 import 'package:tidal/src/artist/tidal_artist_error.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
@@ -33,7 +33,7 @@ void main() {
 
       // Act
       try {
-        await getSingleArtist(
+        await getSingleArtistImpl(
           client,
           tidalAuthToken: tidalAuthToken,
           id: id,
@@ -70,7 +70,7 @@ void main() {
 
       // Act
       try {
-        await getSingleArtist(
+        await getSingleArtistImpl(
           client,
           tidalAuthToken: tidalAuthToken,
           id: id,
@@ -117,7 +117,7 @@ void main() {
       );
 
       // Act
-      final result = await getSingleArtist(
+      final result = await getSingleArtistImpl(
         client,
         tidalAuthToken: tidalAuthToken,
         id: id,

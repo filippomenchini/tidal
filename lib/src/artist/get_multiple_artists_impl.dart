@@ -10,7 +10,7 @@ const _getMultipleArtistsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-Future<MultipleTidalArtists> getMultipleArtists(
+Future<MultipleTidalArtists> getMultipleArtistsImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required List<String> ids,

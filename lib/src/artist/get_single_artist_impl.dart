@@ -10,7 +10,7 @@ const _getSingleArtistEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-Future<TidalArtist> getSingleArtist(
+Future<TidalArtist> getSingleArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required String id,

@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:http/http.dart';
-import 'package:tidal/src/artist/get_multiple_artists.dart';
+import 'package:tidal/src/artist/get_multiple_artists_impl.dart';
 import 'package:tidal/src/artist/tidal_artist.dart';
 import 'package:tidal/src/artist/tidal_artist_error.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
@@ -37,7 +37,7 @@ void main() {
 
       // Act
       try {
-        await getMultipleArtists(
+        await getMultipleArtistsImpl(
           client,
           tidalAuthToken: tidalAuthToken,
           ids: ids,
@@ -78,7 +78,7 @@ void main() {
 
       // Act
       try {
-        await getMultipleArtists(
+        await getMultipleArtistsImpl(
           client,
           tidalAuthToken: tidalAuthToken,
           ids: ids,
@@ -196,7 +196,7 @@ void main() {
       );
 
       // Act
-      final result = await getMultipleArtists(
+      final result = await getMultipleArtistsImpl(
         client,
         tidalAuthToken: tidalAuthToken,
         ids: ids,

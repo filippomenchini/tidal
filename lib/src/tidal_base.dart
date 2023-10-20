@@ -1,6 +1,15 @@
-// TODO: Put public facing types in this file.
+import 'artist/artist_api.dart';
+import 'tidal_impl.dart';
 
-/// Checks if you are awesome. Spoiler: you are.
-class Awesome {
-  bool get isAwesome => true;
+abstract class Tidal {
+  ArtistAPI get artist;
+
+  static Future<Tidal> initialize({
+    required String clientId,
+    required String clientSecret,
+  }) =>
+      initializeImpl(
+        clientId: clientId,
+        clientSecret: clientSecret,
+      );
 }
