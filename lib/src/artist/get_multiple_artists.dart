@@ -6,18 +6,21 @@ import '../authorization/tidal_auth_token.dart';
 import 'tidal_artist.dart';
 import 'tidal_artist_error.dart';
 
-const _getSingleArtistEndpointUrl = 'https://openapi.tidal.com/artists';
+const _getMultipleArtistsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-Future<TidalArtist> getSingleArtist(
+Future<MultipleTidalArtists> getMultipleArtists(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
-  required String id,
+  required List<String> ids,
   required String countryCode,
 }) async {
+  final urlIds = ids.map((id) => "ids=$id").join("&");
   final response = await client.get(
-    Uri.parse('$_getSingleArtistEndpointUrl/$id?countryCode=$countryCode'),
+    Uri.parse(
+      '$_getMultipleArtistsEndpointUrl?$urlIds&countryCode=$countryCode',
+    ),
     headers: {
       ..._acceptHeader,
       ..._contentTypeHeader,
@@ -33,11 +36,11 @@ Future<TidalArtist> getSingleArtist(
         .toList();
   }
 
-  if (response.statusCode != 200) {
+  if (response.statusCode != 207) {
     throw (json['errors'] as List)
         .map((errorJson) => TidalArtistError.fromJson(errorJson))
         .toList();
   }
 
-  return TidalArtist.fromJson(json["resource"]);
+  return MultipleTidalArtists.fromJson(json);
 }

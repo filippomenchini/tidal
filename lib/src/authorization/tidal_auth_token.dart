@@ -25,7 +25,7 @@ class TidalAuthToken extends Equatable {
     return currentDate.compareTo(expirationDate) > 0;
   }
 
-  Map<String, String> toHeader() => {'Authorization': 'Bearer $accessToken'};
+  Map<String, String> get header => {'Authorization': 'Bearer $accessToken'};
 
   @override
   List<Object?> get props => [accessToken, tokenType, expiresIn, createdAt];
