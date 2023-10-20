@@ -53,3 +53,5 @@ void main() async {
 ## Additional information
 
 - For more information on the available APIs, visit [Tidal Devloper Portal](https://developer.tidal.com/).
+- Contributions are welcome, visit the [GitHub repo page](https://github.com/filippomenchini/tidal).
+- File issues or provide feedback on the [GitHub issue tracker](https://github.com/filippomenchini/tidal/issues).
