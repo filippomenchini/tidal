@@ -6,6 +6,9 @@ import 'tidal_auth_error.dart';
 import 'tidal_auth_token.dart';
 
 const _authorizeEndpointUrl = 'https://auth.tidal.com/v1/oauth2/token';
+const _contentTypeHeader = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
 const _authorizationRequestBody = 'grant_type=client_credentials';
 
 /// Authorizes and retrieves a Tidal authentication token.
@@ -27,7 +30,10 @@ Future<TidalAuthToken> authorize(
   final credentials = "$clientId:$clientSecret";
   final utf8Credentials = utf8.encode(credentials);
   final encodedCredentials = base64Encode(utf8Credentials);
-  final headers = {'Authorization': 'Basic $encodedCredentials'};
+  final headers = {
+    'Authorization': 'Basic $encodedCredentials',
+    ..._contentTypeHeader,
+  };
 
   final response = await client.post(
     Uri.parse(_authorizeEndpointUrl),

@@ -1,7 +1,7 @@
 name: tidal
 description: A Dart library for connecting to and interacting with the Tidal Developer Portal APIs.
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+version: 0.0.1
+repository: https://github.com/filippomenchini/tidal
 
 environment:
   sdk: ^3.1.3

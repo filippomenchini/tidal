@@ -20,4 +20,7 @@ abstract class Tidal {
         clientId: clientId,
         clientSecret: clientSecret,
       );
+
+  /// Disposes the Tidal instance.
+  void dispose();
 }

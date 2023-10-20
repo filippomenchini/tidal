@@ -22,6 +22,11 @@ class TidalArtist extends Equatable {
 
   @override
   List<Object?> get props => [id, name, picture];
+
+  @override
+  String toString() {
+    return "ID: $id\nName: $name";
+  }
 }
 
 /// Represents an artist's picture information.

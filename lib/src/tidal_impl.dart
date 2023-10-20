@@ -9,12 +9,19 @@ class TidalImpl implements Tidal {
   /// The implementation of the ArtistAPI interface.
   final ArtistAPI artistAPI;
 
+  /// The implementation of the http client.
+  final http.Client client;
+
   TidalImpl({
     required this.artistAPI,
+    required this.client,
   });
 
   @override
   ArtistAPI get artist => artistAPI;
+
+  @override
+  void dispose() => client.close();
 }
 
 /// Initializes and sets up a Tidal instance for making API requests.
@@ -44,5 +51,6 @@ Future<Tidal> initializeImpl({
 
   return TidalImpl(
     artistAPI: artistAPI,
+    client: client,
   );
 }
