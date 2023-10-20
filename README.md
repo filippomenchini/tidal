@@ -1,4 +1,4 @@
-# Tidal API Connection Library
+# Tidal Developer Portal API Library
 
 A Dart library for connecting to and interacting with the Tidal Developer Portal APIs.
 
@@ -17,10 +17,6 @@ A Dart library for connecting to and interacting with the Tidal Developer Portal
 - [ ] Search API
 
 ## Getting Started
-
-### Prerequisites
-
-- Dart SDK installed.
 
 ### Installation
 
