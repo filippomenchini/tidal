@@ -24,8 +24,8 @@ class TidalArtist extends Equatable {
 
 class TidalArtistPicture extends Equatable {
   final String url;
-  final String width;
-  final String height;
+  final int width;
+  final int height;
 
   const TidalArtistPicture({
     required this.url,

@@ -27,11 +27,17 @@ Future<TidalArtist> getSingleArtist(
 
   final json = jsonDecode(response.body);
 
+  if (response.statusCode == 400) {
+    throw (json['errors'] as List)
+        .map((errorJson) => BadRequestTidalArtistError.fromJson(errorJson))
+        .toList();
+  }
+
   if (response.statusCode != 200) {
     throw (json['errors'] as List)
         .map((errorJson) => TidalArtistError.fromJson(errorJson))
         .toList();
   }
 
-  return TidalArtist.fromJson(json);
+  return TidalArtist.fromJson(json["resource"]);
 }
