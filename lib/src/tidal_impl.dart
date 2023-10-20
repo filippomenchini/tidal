@@ -4,7 +4,9 @@ import 'authorization/authorize.dart';
 
 import 'tidal_base.dart';
 
+/// Implementation of the Tidal music streaming service interface.
 class TidalImpl implements Tidal {
+  /// The implementation of the ArtistAPI interface.
   final ArtistAPI artistAPI;
 
   TidalImpl({
@@ -15,6 +17,12 @@ class TidalImpl implements Tidal {
   ArtistAPI get artist => artistAPI;
 }
 
+/// Initializes and sets up a Tidal instance for making API requests.
+///
+/// [clientId] is the client ID for authentication.
+/// [clientSecret] is the client secret for authentication.
+///
+/// Returns a [Tidal] instance for interacting with the Tidal service.
 Future<Tidal> initializeImpl({
   required String clientId,
   required String clientSecret,

@@ -24,7 +24,7 @@ void main() {
         fail('Should have thrown a TidalAuthError');
       } catch (e) {
         // Assert
-        expect(e, TidalAuthError(errorCode: '500', errorMesssage: 'error'));
+        expect(e, TidalAuthError(errorCode: '500', errorMessage: 'error'));
       }
     });
 

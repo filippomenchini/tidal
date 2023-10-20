@@ -8,6 +8,16 @@ import 'tidal_auth_token.dart';
 const _authorizeEndpointUrl = 'https://auth.tidal.com/v1/oauth2/token';
 const _authorizationRequestBody = 'grant_type=client_credentials';
 
+/// Authorizes and retrieves a Tidal authentication token.
+///
+/// [client] is an HTTP client for making the authorization request.
+/// [clientId] is the client ID for authentication.
+/// [clientSecret] is the client secret for authentication.
+/// [currentDateTime] is the current date and time for token creation.
+///
+/// Returns a [TidalAuthToken] object representing the obtained authentication token.
+///
+/// Throws a [TidalAuthError] in case of an unsuccessful authorization, including the error code and message.
 Future<TidalAuthToken> authorize(
   http.Client client, {
   required String clientId,
@@ -28,7 +38,7 @@ Future<TidalAuthToken> authorize(
   if (response.statusCode != 200) {
     throw TidalAuthError(
       errorCode: response.statusCode.toString(),
-      errorMesssage: response.body,
+      errorMessage: response.body,
     );
   }
 
