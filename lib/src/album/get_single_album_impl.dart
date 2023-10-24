@@ -7,7 +7,7 @@ import '../authorization/tidal_auth_token.dart';
 import 'tidal_album.dart';
 import 'tidal_album_error.dart';
 
-const _getSingleArtistEndpointUrl = 'https://openapi.tidal.com/albums';
+const _getSingleAlbumEndpointUrl = 'https://openapi.tidal.com/albums';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
@@ -39,7 +39,7 @@ Future<TidalAlbum> getSingleAlbumImpl(
   required String countryCode,
 }) async {
   final response = await client.get(
-    Uri.parse('$_getSingleArtistEndpointUrl/$id?countryCode=$countryCode'),
+    Uri.parse('$_getSingleAlbumEndpointUrl/$id?countryCode=$countryCode'),
     headers: {
       ..._acceptHeader,
       ..._contentTypeHeader,
