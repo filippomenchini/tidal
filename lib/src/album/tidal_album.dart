@@ -15,8 +15,8 @@ class TidalAlbum extends Equatable {
   final String type;
   final String copyright;
   final List<TidalAlbumArtist> artists;
-  final TidalImageCover imageCover;
-  final TidalVideoCover videoCover;
+  final List<TidalImageCover> imageCover;
+  final List<TidalVideoCover> videoCover;
   final TidalAlbumMetadata mediaMetadata;
   final TidalAlbumProperties properties;
 
@@ -53,13 +53,22 @@ class TidalAlbum extends Equatable {
         numberOfVideos = json["numberOfVideos"],
         type = json["type"],
         copyright = json["copyright"],
-        imageCover = TidalImageCover.fromJson(json["imageCover"]),
-        videoCover = TidalVideoCover.fromJson(json["videoCover"]),
+        imageCover = (json["imageCover"] as List)
+            .map((e) => TidalImageCover.fromJson(e))
+            .toList(),
+        videoCover = (json["videoCover"] as List)
+            .map((e) => TidalVideoCover.fromJson(e))
+            .toList(),
         mediaMetadata = TidalAlbumMetadata.fromJson(json["mediaMetadata"]),
         properties = TidalAlbumProperties.fromJson(json["properties"]),
         artists = (json["artists"] as List)
             .map((e) => TidalAlbumArtist.fromJson(e))
             .toList();
+
+  @override
+  String toString() {
+    return "ID: $id\nTITLE: $title\nARTIST: ${mainArtist.name}\nCOPYRIGHT: $copyright";
+  }
 
   @override
   List<Object?> get props => [
@@ -147,7 +156,7 @@ class TidalVideoCover extends Equatable {
 
 /// Represents the properties of an album.
 class TidalAlbumProperties extends Equatable {
-  final String content;
+  final List<String> content;
 
   const TidalAlbumProperties({
     required this.content,
@@ -155,7 +164,7 @@ class TidalAlbumProperties extends Equatable {
 
   /// Constructs a TidalAlbumProperties from JSON data.
   TidalAlbumProperties.fromJson(Map<String, dynamic> json)
-      : content = json["content"];
+      : content = (json["content"] as List).map((e) => e.toString()).toList();
 
   @override
   List<Object?> get props => [content];
@@ -163,14 +172,15 @@ class TidalAlbumProperties extends Equatable {
 
 /// Represents the metadata of an album.
 class TidalAlbumMetadata extends Equatable {
-  final String tags;
+  final List<String> tags;
 
   const TidalAlbumMetadata({
     required this.tags,
   });
 
   /// Constructs a TidalAlbumMetadata from JSON data.
-  TidalAlbumMetadata.fromJson(Map<String, dynamic> json) : tags = json["tags"];
+  TidalAlbumMetadata.fromJson(Map<String, dynamic> json)
+      : tags = (json["tags"] as List).map((e) => e.toString()).toList();
 
   @override
   List<Object?> get props => [tags];
