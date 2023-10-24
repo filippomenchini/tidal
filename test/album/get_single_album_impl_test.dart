@@ -83,7 +83,7 @@ void main() {
       }
     });
 
-    test('Should return an artist when status code is 200', () async {
+    test('Should return an album when status code is 200', () async {
       // Arrange
       String actualUrl = '';
       final client = http_testing.MockClient((request) async {

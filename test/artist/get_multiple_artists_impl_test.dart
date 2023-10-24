@@ -91,7 +91,7 @@ void main() {
       }
     });
 
-    test('Should return an artist when status code is 207', () async {
+    test('Should return multiple artists when status code is 207', () async {
       // Arrange
       String actualUrl = '';
       final client = http_testing.MockClient((request) async {
