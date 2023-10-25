@@ -185,3 +185,59 @@ class TidalAlbumMetadata extends Equatable {
   @override
   List<Object?> get props => [tags];
 }
+
+class TidalAlbumResponse extends Equatable {
+  final TidalAlbum album;
+  final String id;
+  final int status;
+  final String message;
+
+  const TidalAlbumResponse({
+    required this.album,
+    required this.id,
+    required this.status,
+    required this.message,
+  });
+
+  TidalAlbumResponse.fromJson(Map<String, dynamic> json)
+      : album = TidalAlbum.fromJson(json["resource"]),
+        id = json["id"],
+        status = json["status"],
+        message = json["message"];
+
+  @override
+  List<Object?> get props => [album, id, status, message];
+}
+
+class MultipleTidalAlbumsMetadata extends Equatable {
+  final int total;
+
+  const MultipleTidalAlbumsMetadata({
+    required this.total,
+  });
+
+  MultipleTidalAlbumsMetadata.fromJson(Map<String, dynamic> json)
+      : total = json["total"];
+
+  @override
+  List<Object?> get props => [total];
+}
+
+class MultipleTidalAlbums extends Equatable {
+  final List<TidalAlbumResponse> albumResponses;
+  final MultipleTidalAlbumsMetadata metadata;
+
+  const MultipleTidalAlbums({
+    required this.albumResponses,
+    required this.metadata,
+  });
+
+  MultipleTidalAlbums.fromJson(Map<String, dynamic> json)
+      : albumResponses = (json["data"] as List)
+            .map((e) => TidalAlbumResponse.fromJson(e))
+            .toList(),
+        metadata = MultipleTidalAlbumsMetadata.fromJson(json["metadata"]);
+
+  @override
+  List<Object?> get props => [albumResponses, metadata];
+}
