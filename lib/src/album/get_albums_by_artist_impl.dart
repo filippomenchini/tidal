@@ -9,6 +9,30 @@ const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
+/// Fetches multiple albums by a specific artist from Tidal using an HTTP request.
+///
+/// This method utilizes the HTTP [client] to make a request to obtain multiple
+/// albums associated with a particular [artistId] from Tidal. It requires a
+/// [tidalAuthToken] for authentication, the [artistId] of the artist, the
+/// [countryCode], and optional parameters for [offset] and [limit] to paginate
+/// the results.
+///
+/// The optional [offset] parameter specifies the starting point for fetching
+/// albums, while the [limit] parameter defines the maximum number of albums to
+/// retrieve in a single request.
+///
+/// If the request is successful, the albums are returned as an instance of
+/// [MultipleTidalAlbums].
+///
+/// Parameters:
+/// - [client]: The HTTP client used for the request.
+/// - [tidalAuthToken]: The Tidal authentication token.
+/// - [artistId]: The identifier of the artist whose albums are to be fetched.
+/// - [countryCode]: The country code for the request.
+/// - [offset]: Optional. The starting point for fetching albums.
+/// - [limit]: Optional. The maximum number of albums to retrieve.
+///
+/// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
 Future<MultipleTidalAlbums> getAlbumsByArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,

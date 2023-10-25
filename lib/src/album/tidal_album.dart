@@ -186,6 +186,7 @@ class TidalAlbumMetadata extends Equatable {
   List<Object?> get props => [tags];
 }
 
+/// Represents the album response contained in a [MultipleTidalAlbums] object.
 class TidalAlbumResponse extends Equatable {
   final TidalAlbum album;
   final String id;
@@ -199,6 +200,7 @@ class TidalAlbumResponse extends Equatable {
     required this.message,
   });
 
+  /// Constructs a TidalAlbumResponse from JSON data.
   TidalAlbumResponse.fromJson(Map<String, dynamic> json)
       : album = TidalAlbum.fromJson(json["resource"]),
         id = json["id"],
@@ -209,6 +211,7 @@ class TidalAlbumResponse extends Equatable {
   List<Object?> get props => [album, id, status, message];
 }
 
+/// Represents the metadata of a [MultipleTidalAlbums] object.
 class MultipleTidalAlbumsMetadata extends Equatable {
   final int total;
 
@@ -216,6 +219,7 @@ class MultipleTidalAlbumsMetadata extends Equatable {
     required this.total,
   });
 
+  /// Constructs a MultipleTidalAlbumsMetadata from JSON data.
   MultipleTidalAlbumsMetadata.fromJson(Map<String, dynamic> json)
       : total = json["total"];
 
@@ -223,6 +227,7 @@ class MultipleTidalAlbumsMetadata extends Equatable {
   List<Object?> get props => [total];
 }
 
+/// Represents multiple tidal albums.
 class MultipleTidalAlbums extends Equatable {
   final List<TidalAlbumResponse> albumResponses;
   final MultipleTidalAlbumsMetadata metadata;
@@ -232,6 +237,7 @@ class MultipleTidalAlbums extends Equatable {
     required this.metadata,
   });
 
+  /// Constructs a MultipleTidalAlbums from JSON data.
   MultipleTidalAlbums.fromJson(Map<String, dynamic> json)
       : albumResponses = (json["data"] as List)
             .map((e) => TidalAlbumResponse.fromJson(e))
