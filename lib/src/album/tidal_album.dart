@@ -164,7 +164,9 @@ class TidalAlbumProperties extends Equatable {
 
   /// Constructs a TidalAlbumProperties from JSON data.
   TidalAlbumProperties.fromJson(Map<String, dynamic> json)
-      : content = (json["content"] as List).map((e) => e.toString()).toList();
+      : content = json["content"] is List
+            ? (json["content"] as List).map((e) => e.toString()).toList()
+            : [json["content"]];
 
   @override
   List<Object?> get props => [content];
@@ -180,7 +182,9 @@ class TidalAlbumMetadata extends Equatable {
 
   /// Constructs a TidalAlbumMetadata from JSON data.
   TidalAlbumMetadata.fromJson(Map<String, dynamic> json)
-      : tags = (json["tags"] as List).map((e) => e.toString()).toList();
+      : tags = json["tags"] is List
+            ? (json["tags"] as List).map((e) => e.toString()).toList()
+            : [json["tags"]];
 
   @override
   List<Object?> get props => [tags];
@@ -213,18 +217,23 @@ class TidalAlbumResponse extends Equatable {
 
 /// Represents the metadata of a [MultipleTidalAlbums] object.
 class MultipleTidalAlbumsMetadata extends Equatable {
-  final int total;
+  final Map<String, dynamic> _metadata;
 
   const MultipleTidalAlbumsMetadata({
-    required this.total,
-  });
+    required Map<String, dynamic> metadata,
+  }) : _metadata = metadata;
+
+  int get total => _metadata["total"] ?? 0;
+  int get requested => _metadata["requested"] ?? 0;
+  int get success => _metadata["success"] ?? 0;
+  int get failure => _metadata["failure"] ?? 0;
 
   /// Constructs a MultipleTidalAlbumsMetadata from JSON data.
   MultipleTidalAlbumsMetadata.fromJson(Map<String, dynamic> json)
-      : total = json["total"];
+      : _metadata = json;
 
   @override
-  List<Object?> get props => [total];
+  List<Object?> get props => [_metadata];
 }
 
 /// Represents multiple tidal albums.

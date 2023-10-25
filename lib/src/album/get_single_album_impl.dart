@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/album/handle_album_http_status_code.dart';
+import 'handle_album_http_status_code.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import 'tidal_album.dart';

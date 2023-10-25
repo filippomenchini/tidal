@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
+
 import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
-
 import 'tidal_base.dart';
 
 /// Implementation of the Tidal music streaming service interface.

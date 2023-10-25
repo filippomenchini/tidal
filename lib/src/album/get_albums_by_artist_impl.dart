@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'handle_album_http_status_code.dart';
+
 import '../authorization/tidal_auth_token.dart';
+import 'handle_album_http_status_code.dart';
 import 'tidal_album.dart';
 
 const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/artists';

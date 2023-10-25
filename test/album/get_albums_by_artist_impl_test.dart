@@ -80,7 +80,7 @@ void main() {
             message: "success",
           ),
         ],
-        metadata: MultipleTidalAlbumsMetadata(total: 1),
+        metadata: MultipleTidalAlbumsMetadata(metadata: {"total": 1}),
       );
 
       // Act
