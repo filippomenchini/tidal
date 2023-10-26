@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
-import 'tidal_artist.dart';
-import 'tidal_artist_error.dart';
+import '../commons/handle_http_response.dart';
+import '../types/multiple_response.dart';
+import '../types/tidal_artist.dart';
 
 const _getMultipleArtistsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
@@ -21,7 +20,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 ///
 /// Throws [BadRequestTidalArtistError] if the HTTP response status code is 400, indicating a bad request.
 /// Throws [TidalArtistError] for any other non-207 HTTP response status code.
-Future<MultipleTidalArtists> getMultipleArtistsImpl(
+Future<MultipleResponse<TidalArtist>> getMultipleArtistsImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required List<String> ids,
@@ -39,19 +38,11 @@ Future<MultipleTidalArtists> getMultipleArtistsImpl(
     },
   );
 
-  final json = jsonDecode(response.body);
-
-  if (response.statusCode == 400) {
-    throw (json['errors'] as List)
-        .map((errorJson) => BadRequestTidalArtistError.fromJson(errorJson))
-        .toList();
-  }
-
-  if (response.statusCode != 207) {
-    throw (json['errors'] as List)
-        .map((errorJson) => TidalArtistError.fromJson(errorJson))
-        .toList();
-  }
-
-  return MultipleTidalArtists.fromJson(json);
+  return handleHttpResponse(
+    response: response,
+    onSuccessfulResponse: (json) => MultipleResponse.fromJson(
+      json: json,
+      itemFactory: TidalArtist.fromJson,
+    ),
+  );
 }

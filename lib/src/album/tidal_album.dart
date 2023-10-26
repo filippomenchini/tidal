@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../artist/tidal_artist.dart';
+import '../types/tidal_artist.dart';
 
 /// Represents a Tidal album.
 class TidalAlbum extends Equatable {
@@ -64,11 +63,6 @@ class TidalAlbum extends Equatable {
         artists = (json["artists"] as List)
             .map((e) => TidalAlbumArtist.fromJson(e))
             .toList();
-
-  @override
-  String toString() {
-    return "ID: $id\nTITLE: $title\nARTIST: ${mainArtist.name}\nCOPYRIGHT: $copyright";
-  }
 
   @override
   List<Object?> get props => [

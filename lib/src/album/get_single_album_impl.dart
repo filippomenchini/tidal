@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'handle_album_http_status_code.dart';
 
 import '../authorization/tidal_auth_token.dart';
+import '../commons/handle_http_response.dart';
 import 'tidal_album.dart';
 import 'tidal_album_error.dart';
 
@@ -47,8 +45,8 @@ Future<TidalAlbum> getSingleAlbumImpl(
     },
   );
 
-  final json = jsonDecode(response.body);
-
-  handleAlbumHttpStatusCode(response: response, json: json);
-  return TidalAlbum.fromJson(json["resource"]);
+  return handleHttpResponse(
+    response: response,
+    onSuccessfulResponse: (json) => TidalAlbum.fromJson(json["resource"]),
+  );
 }

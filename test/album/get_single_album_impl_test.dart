@@ -2,9 +2,9 @@ import 'package:http/http.dart';
 import 'package:test/test.dart';
 import 'package:tidal/src/album/get_single_album_impl.dart';
 import 'package:tidal/src/album/tidal_album.dart';
-import 'package:tidal/src/artist/tidal_artist.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
 import 'package:http/testing.dart' as http_testing;
+import 'package:tidal/src/types/tidal_image.dart';
 
 void main() {
   group('Given an album id and a contry code', () {
@@ -46,17 +46,17 @@ void main() {
             id: "15356",
             name: "Lupe Fiasco",
             picture: [
-              TidalArtistPicture(
+              TidalImage(
                 url:
                     "https://resources.tidal.com/images/bae5a813/8e6c/4655/9f5b/659d27a843b5/1024x256.jpg",
                 width: 1024,
-                height: 256,
+                height: 1024,
               ),
-              TidalArtistPicture(
+              TidalImage(
                 url:
                     "https://resources.tidal.com/images/bae5a813/8e6c/4655/9f5b/659d27a843b5/1080x720.jpg",
                 width: 1080,
-                height: 720,
+                height: 1080,
               ),
             ],
           ),

@@ -3,8 +3,8 @@ import 'package:http/testing.dart';
 import 'package:test/test.dart';
 import 'package:tidal/src/album/get_albums_by_barcode_id_impl.dart';
 import 'package:tidal/src/album/tidal_album.dart';
-import 'package:tidal/src/artist/tidal_artist.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
+import 'package:tidal/src/types/tidal_image.dart';
 
 void main() {
   group('Given a barcode id', () {
@@ -48,7 +48,7 @@ void main() {
                   id: "7804",
                   name: "JAY Z",
                   picture: [
-                    TidalArtistPicture(
+                    TidalImage(
                       url:
                           "https://resources.tidal.com/images/717dfdae/beb0/4aea/a553/a70064c30386/80x80.jpg",
                       width: 80,

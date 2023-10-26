@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
+import '../types/multiple_response.dart';
+import '../types/tidal_artist.dart';
 import 'get_multiple_artists_impl.dart';
 import 'get_single_artist_impl.dart';
-import 'tidal_artist.dart';
 
 /// An abstract class defining the interface for Tidal artist-related API operations.
 abstract class ArtistAPI {
@@ -20,7 +21,7 @@ abstract class ArtistAPI {
   ///
   /// [ids] is a list of artist IDs to retrieve.
   /// [countryCode] is the country code for the request.
-  Future<MultipleTidalArtists> getMultipleArtists({
+  Future<MultipleResponse<TidalArtist>> getMultipleArtists({
     required List<String> ids,
     required String countryCode,
   });
@@ -37,7 +38,7 @@ class ArtistAPIImpl implements ArtistAPI {
   });
 
   @override
-  Future<MultipleTidalArtists> getMultipleArtists({
+  Future<MultipleResponse<TidalArtist>> getMultipleArtists({
     required List<String> ids,
     required String countryCode,
   }) =>

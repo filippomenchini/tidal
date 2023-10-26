@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
-import 'handle_album_http_status_code.dart';
+import '../commons/handle_http_response.dart';
 import 'tidal_album.dart';
 
 const _getAlbumsByBarcodeIdEndpointUrl =
@@ -43,8 +41,8 @@ Future<MultipleTidalAlbums> getAlbumsByBarcodeId(
     },
   );
 
-  final json = jsonDecode(response.body);
-
-  handleAlbumHttpStatusCode(response: response, json: json);
-  return MultipleTidalAlbums.fromJson(json);
+  return handleHttpResponse(
+    response: response,
+    onSuccessfulResponse: (json) => MultipleTidalAlbums.fromJson(json),
+  );
 }

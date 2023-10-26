@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'handle_album_http_status_code.dart';
-import 'tidal_album.dart';
 
 import '../authorization/tidal_auth_token.dart';
+import '../commons/handle_http_response.dart';
+import 'tidal_album.dart';
 
 const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/albums/byIds';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
@@ -44,8 +42,8 @@ Future<MultipleTidalAlbums> getMultipleAlbumsImpl(
     },
   );
 
-  final json = jsonDecode(response.body);
-
-  handleAlbumHttpStatusCode(response: response, json: json);
-  return MultipleTidalAlbums.fromJson(json);
+  return handleHttpResponse(
+    response: response,
+    onSuccessfulResponse: (json) => MultipleTidalAlbums.fromJson(json),
+  );
 }
