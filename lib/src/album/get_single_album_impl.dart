@@ -2,8 +2,7 @@ import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
 import '../commons/handle_http_response.dart';
-import 'tidal_album.dart';
-import 'tidal_album_error.dart';
+import '../types/tidal_album.dart';
 
 const _getSingleAlbumEndpointUrl = 'https://openapi.tidal.com/albums';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};

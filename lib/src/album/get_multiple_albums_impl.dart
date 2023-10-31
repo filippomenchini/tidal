@@ -2,7 +2,8 @@ import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
 import '../commons/handle_http_response.dart';
-import 'tidal_album.dart';
+import '../types/multiple_response.dart';
+import '../types/tidal_album.dart';
 
 const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/albums/byIds';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
@@ -24,7 +25,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 /// - [countryCode]: The country code for the request.
 ///
 /// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
-Future<MultipleTidalAlbums> getMultipleAlbumsImpl(
+Future<MultipleResponse<TidalAlbum>> getMultipleAlbumsImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required List<String> ids,
@@ -44,6 +45,9 @@ Future<MultipleTidalAlbums> getMultipleAlbumsImpl(
 
   return handleHttpResponse(
     response: response,
-    onSuccessfulResponse: (json) => MultipleTidalAlbums.fromJson(json),
+    onSuccessfulResponse: (json) => MultipleResponse.fromJson(
+      json: json,
+      itemFactory: TidalAlbum.fromJson,
+    ),
   );
 }

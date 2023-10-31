@@ -2,8 +2,11 @@ import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
 import 'package:tidal/src/album/get_albums_by_artist_impl.dart';
-import 'package:tidal/src/album/tidal_album.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
+import 'package:tidal/src/types/multiple_response.dart';
+import 'package:tidal/src/types/multiple_response_item.dart';
+import 'package:tidal/src/types/tidal_album.dart';
+import 'package:tidal/src/types/tidal_artist.dart';
 import 'package:tidal/src/types/tidal_image.dart';
 
 void main() {
@@ -29,10 +32,10 @@ void main() {
       const limit = 1;
       const expectedUrl =
           'https://openapi.tidal.com/artists/15356/albums?countryCode=US';
-      final expectedResult = MultipleTidalAlbums(
-        albumResponses: [
-          TidalAlbumResponse(
-            album: TidalAlbum(
+      final expectedResult = MultipleResponse(
+        items: [
+          MultipleResponseItem(
+            data: TidalAlbum(
               id: "304761400",
               barcodeId: "197189404849",
               title: "Roc-A-Fella Y'all",
@@ -45,7 +48,7 @@ void main() {
               copyright:
                   "(C) 2023 1st and 15th Too marketed and distributed by Thirty Tigers",
               artists: [
-                TidalAlbumArtist(
+                TidalMediaArtist(
                   main: true,
                   id: "15356",
                   name: "Lupe Fiasco",
@@ -60,7 +63,7 @@ void main() {
                 ),
               ],
               imageCover: [
-                TidalImageCover(
+                TidalImage(
                   url:
                       "https://resources.tidal.com/images/c2a0cf9c/0597/4bda/b615/a94cbeec71a6/1080x1080.jpg",
                   width: 1080,
@@ -68,19 +71,19 @@ void main() {
                 ),
               ],
               videoCover: [],
-              mediaMetadata: TidalAlbumMetadata(
-                tags: ["HIRES_LOSSLESS", "LOSSLESS"],
-              ),
-              properties: TidalAlbumProperties(
-                content: ["explicit"],
-              ),
+              mediaMetadata: {
+                'tags': ["HIRES_LOSSLESS", "LOSSLESS"],
+              },
+              properties: {
+                'content': ["explicit"],
+              },
             ),
             id: "304761400",
             status: 200,
             message: "success",
           ),
         ],
-        metadata: MultipleTidalAlbumsMetadata(metadata: {"total": 1}),
+        metadata: {"total": 1},
       );
 
       // Act

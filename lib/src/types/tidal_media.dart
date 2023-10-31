@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../album/tidal_album.dart';
+import 'tidal_artist.dart';
+import 'tidal_image.dart';
 
 abstract class TidalMedia extends Equatable {
   final String id;
@@ -8,7 +9,7 @@ abstract class TidalMedia extends Equatable {
   final int duration;
   final String title;
   final String copyright;
-  final List<TidalAlbumArtist> artists;
+  final List<TidalMediaArtist> artists;
   final int trackNumber;
   final int volumeNumber;
   final String isrc;
@@ -16,6 +17,7 @@ abstract class TidalMedia extends Equatable {
   final String albumId;
   final String artifactType;
   final Map<String, dynamic> properties;
+  final TidalImage? image;
 
   TidalMedia({
     required this.id,
@@ -31,6 +33,7 @@ abstract class TidalMedia extends Equatable {
     required this.albumId,
     required this.artifactType,
     required this.properties,
+    this.image,
   });
 
   TidalMedia.fromJson(Map<String, dynamic> json)
@@ -40,7 +43,7 @@ abstract class TidalMedia extends Equatable {
         title = json["title"],
         copyright = json["copyright"],
         artists = (json["artists"] as List)
-            .map((e) => TidalAlbumArtist.fromJson(e))
+            .map((e) => TidalMediaArtist.fromJson(e))
             .toList(),
         trackNumber = json["trackNumber"],
         volumeNumber = json["volumeNumber"],
@@ -48,7 +51,8 @@ abstract class TidalMedia extends Equatable {
         providerId = json["providerId"],
         albumId = json["albumId"],
         artifactType = json["artifactType"],
-        properties = json["properties"];
+        properties = json["properties"],
+        image = json["image"];
 
   @override
   List<Object?> get props => [

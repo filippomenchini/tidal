@@ -1,9 +1,10 @@
 import 'package:http/http.dart';
 import 'package:test/test.dart';
 import 'package:tidal/src/album/get_single_album_impl.dart';
-import 'package:tidal/src/album/tidal_album.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
 import 'package:http/testing.dart' as http_testing;
+import 'package:tidal/src/types/tidal_album.dart';
+import 'package:tidal/src/types/tidal_artist.dart';
 import 'package:tidal/src/types/tidal_image.dart';
 
 void main() {
@@ -41,7 +42,7 @@ void main() {
         copyright:
             "(C) 2022 1st and 15th Too marketed and distributed by Thirty Tigers",
         artists: [
-          TidalAlbumArtist(
+          TidalMediaArtist(
             main: true,
             id: "15356",
             name: "Lupe Fiasco",
@@ -62,7 +63,7 @@ void main() {
           ),
         ],
         imageCover: [
-          TidalImageCover(
+          TidalImage(
             url:
                 "https://resources.tidal.com/images/c580b6f1/4768/471d/a198/900c6f09570d/1080x1080.jpg",
             width: 1080,
@@ -70,8 +71,12 @@ void main() {
           ),
         ],
         videoCover: [],
-        mediaMetadata: TidalAlbumMetadata(tags: ["HIRES_LOSSLESS", "LOSSLESS"]),
-        properties: TidalAlbumProperties(content: ['explicit']),
+        mediaMetadata: {
+          'tags': ["HIRES_LOSSLESS", "LOSSLESS"]
+        },
+        properties: {
+          'content': ['explicit']
+        },
       );
       // Act
       final result = await getSingleAlbumImpl(

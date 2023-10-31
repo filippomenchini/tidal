@@ -2,8 +2,11 @@ import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
 import 'package:tidal/src/album/get_albums_by_barcode_id_impl.dart';
-import 'package:tidal/src/album/tidal_album.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
+import 'package:tidal/src/types/multiple_response.dart';
+import 'package:tidal/src/types/multiple_response_item.dart';
+import 'package:tidal/src/types/tidal_album.dart';
+import 'package:tidal/src/types/tidal_artist.dart';
 import 'package:tidal/src/types/tidal_image.dart';
 
 void main() {
@@ -27,10 +30,10 @@ void main() {
       final barcodeId = '00854242007552';
       final expectedUrl =
           "https://openapi.tidal.com/albums/byBarcodeId?barcodeId=00854242007552&countryCode=US";
-      final expectedResult = MultipleTidalAlbums(
-        albumResponses: [
-          TidalAlbumResponse(
-            album: TidalAlbum(
+      final expectedResult = MultipleResponse(
+        items: [
+          MultipleResponseItem(
+            data: TidalAlbum(
               id: '75413011',
               barcodeId: "00854242007552",
               title: "4:44",
@@ -43,7 +46,7 @@ void main() {
               copyright:
                   "(p)(c) 2017 S. CARTER ENTERPRISES, LLC. MARKETED BY ROC NATION & DISTRIBUTED BY ROC NATION/UMG RECORDINGS INC.",
               artists: [
-                TidalAlbumArtist(
+                TidalMediaArtist(
                   main: true,
                   id: "7804",
                   name: "JAY Z",
@@ -58,7 +61,7 @@ void main() {
                 ),
               ],
               imageCover: [
-                TidalImageCover(
+                TidalImage(
                   url:
                       "https://resources.tidal.com/images/717dfdae/beb0/4aea/a553/a70064c30386/80x80.jpg",
                   width: 80,
@@ -66,26 +69,30 @@ void main() {
                 ),
               ],
               videoCover: [
-                TidalVideoCover(
+                TidalImage(
                   url:
                       "https://resources.tidal.com/images/717dfdae/beb0/4aea/a553/a70064c30386/80x80.jpg",
                   width: 80,
                   height: 80,
                 ),
               ],
-              mediaMetadata: TidalAlbumMetadata(tags: ["HIRES_LOSSLESS"]),
-              properties: TidalAlbumProperties(content: ["explicit"]),
+              mediaMetadata: {
+                'tags': ["HIRES_LOSSLESS"]
+              },
+              properties: {
+                'content': ["explicit"]
+              },
             ),
             id: "4328473",
             status: 200,
             message: "success",
           ),
         ],
-        metadata: MultipleTidalAlbumsMetadata(metadata: {
+        metadata: {
           "requested": 10,
           "success": 8,
           "failure": 2,
-        }),
+        },
       );
 
       // Act

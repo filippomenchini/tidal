@@ -2,7 +2,8 @@ import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
 import '../commons/handle_http_response.dart';
-import 'tidal_album.dart';
+import '../types/multiple_response.dart';
+import '../types/tidal_album.dart';
 
 const _getAlbumsByBarcodeIdEndpointUrl =
     'https://openapi.tidal.com/albums/byBarcodeId';
@@ -25,7 +26,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 /// - [countryCode]: The country code for the request.
 ///
 /// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
-Future<MultipleTidalAlbums> getAlbumsByBarcodeId(
+Future<MultipleResponse<TidalAlbum>> getAlbumsByBarcodeId(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required String barcodeId,
@@ -43,6 +44,9 @@ Future<MultipleTidalAlbums> getAlbumsByBarcodeId(
 
   return handleHttpResponse(
     response: response,
-    onSuccessfulResponse: (json) => MultipleTidalAlbums.fromJson(json),
+    onSuccessfulResponse: (json) => MultipleResponse.fromJson(
+      json: json,
+      itemFactory: TidalAlbum.fromJson,
+    ),
   );
 }

@@ -2,7 +2,8 @@ import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
 import '../commons/handle_http_response.dart';
-import 'tidal_album.dart';
+import '../types/multiple_response.dart';
+import '../types/tidal_album.dart';
 
 const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
@@ -32,7 +33,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 /// - [limit]: Optional. The maximum number of albums to retrieve.
 ///
 /// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
-Future<MultipleTidalAlbums> getAlbumsByArtistImpl(
+Future<MultipleResponse<TidalAlbum>> getAlbumsByArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required String artistId,
@@ -55,6 +56,9 @@ Future<MultipleTidalAlbums> getAlbumsByArtistImpl(
 
   return handleHttpResponse(
     response: response,
-    onSuccessfulResponse: (json) => MultipleTidalAlbums.fromJson(json),
+    onSuccessfulResponse: (json) => MultipleResponse.fromJson(
+      json: json,
+      itemFactory: TidalAlbum.fromJson,
+    ),
   );
 }
