@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'tidal_artist.dart';
 import 'tidal_image.dart';
 
-abstract class TidalMedia extends Equatable {
+class TidalMedia extends Equatable {
   final String id;
   final String version;
   final int duration;
@@ -17,6 +17,7 @@ abstract class TidalMedia extends Equatable {
   final String albumId;
   final String artifactType;
   final Map<String, dynamic> properties;
+  final Map<String, dynamic> mediaMetadata;
   final TidalImage? image;
 
   TidalMedia({
@@ -33,6 +34,7 @@ abstract class TidalMedia extends Equatable {
     required this.albumId,
     required this.artifactType,
     required this.properties,
+    required this.mediaMetadata,
     this.image,
   });
 
@@ -52,6 +54,7 @@ abstract class TidalMedia extends Equatable {
         albumId = json["albumId"],
         artifactType = json["artifactType"],
         properties = json["properties"],
+        mediaMetadata = json["mediaMetadata"],
         image = json["image"];
 
   @override
@@ -68,5 +71,8 @@ abstract class TidalMedia extends Equatable {
         providerId,
         albumId,
         artifactType,
+        mediaMetadata,
+        mediaMetadata,
+        image,
       ];
 }
