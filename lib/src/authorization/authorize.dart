@@ -11,16 +11,20 @@ const _contentTypeHeader = {
 };
 const _authorizationRequestBody = 'grant_type=client_credentials';
 
-/// Authorizes and retrieves a Tidal authentication token.
+/// Authorizes access to the Tidal API by obtaining an authentication token.
 ///
-/// [client] is an HTTP client for making the authorization request.
-/// [clientId] is the client ID for authentication.
-/// [clientSecret] is the client secret for authentication.
-/// [currentDateTime] is the current date and time for token creation.
+/// This method performs the necessary steps to obtain an authentication token
+/// for accessing the Tidal API. It requires the [clientId] and [clientSecret]
+/// for authentication. The [currentDateTime] is used to set the token's
+/// creation time.
 ///
-/// Returns a [TidalAuthToken] object representing the obtained authentication token.
+/// Parameters:
+/// - [client]: The HTTP client used to make the API request.
+/// - [clientId]: The client ID for authentication.
+/// - [clientSecret]: The client secret for authentication.
+/// - [currentDateTime]: The current date and time used to set the token's creation time.
 ///
-/// Throws a [TidalAuthError] in case of an unsuccessful authorization, including the error code and message.
+/// Returns: A [TidalAuthToken] object containing the obtained authentication token.
 Future<TidalAuthToken> authorize(
   http.Client client, {
   required String clientId,
