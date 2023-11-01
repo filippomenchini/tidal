@@ -6,21 +6,36 @@ import '../types/tidal_artist.dart';
 import 'get_multiple_artists_impl.dart';
 import 'get_single_artist_impl.dart';
 
-/// An abstract class defining the interface for Tidal artist-related API operations.
+/// An abstract interface for accessing artist-related operations in the Tidal service.
+///
+/// This interface defines methods for fetching information about single artists or multiple artists
+/// from the Tidal service.
 abstract class ArtistAPI {
-  /// Retrieves a single Tidal artist by ID.
+  /// Fetches information about a single artist based on their [id] and [countryCode].
   ///
-  /// [id] is the ID of the artist to retrieve.
-  /// [countryCode] is the country code for the request.
+  /// This method retrieves information about a single artist from the Tidal service
+  /// using their unique [id] and the [countryCode] for the request.
+  ///
+  /// Parameters:
+  /// - [id]: The unique identifier of the artist to retrieve.
+  /// - [countryCode]: The country code for the request.
+  ///
+  /// Returns: A [TidalArtist] object representing the requested artist.
   Future<TidalArtist> getSingleArtist({
     required String id,
     required String countryCode,
   });
 
-  /// Retrieves multiple Tidal artists by their IDs.
+  /// Fetches information about multiple artists based on their [ids] and [countryCode].
   ///
-  /// [ids] is a list of artist IDs to retrieve.
-  /// [countryCode] is the country code for the request.
+  /// This method retrieves information about multiple artists from the Tidal service
+  /// using a list of artist [ids] and the [countryCode] for the request.
+  ///
+  /// Parameters:
+  /// - [ids]: A list of unique identifiers for the artists to retrieve.
+  /// - [countryCode]: The country code for the request.
+  ///
+  /// Returns: A [MultipleResponse] containing [TidalArtist] objects for the requested artists.
   Future<MultipleResponse<TidalArtist>> getMultipleArtists({
     required List<String> ids,
     required String countryCode,

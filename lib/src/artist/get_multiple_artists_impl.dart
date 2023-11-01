@@ -9,17 +9,18 @@ const _getMultipleArtistsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Fetches multiple Tidal artists using the Tidal API.
+/// Fetches information about multiple artists based on their [ids] and [countryCode].
 ///
-/// [client] is an HTTP client for making the request.
-/// [tidalAuthToken] is the Tidal authentication token required for the request.
-/// [ids] is a list of artist IDs to retrieve.
-/// [countryCode] is the country code for the request.
+/// This method retrieves information about multiple artists from the Tidal service
+/// using a list of artist [ids] and the [countryCode] for the request.
 ///
-/// Returns a [MultipleTidalArtists] object representing the retrieved artists and their metadata.
+/// Parameters:
+/// - [client]: The HTTP client used to make the API request.
+/// - [tidalAuthToken]: The authentication token required for the request.
+/// - [ids]: A list of unique identifiers for the artists to retrieve.
+/// - [countryCode]: The country code for the request.
 ///
-/// Throws [BadRequestTidalArtistError] if the HTTP response status code is 400, indicating a bad request.
-/// Throws [TidalArtistError] for any other non-207 HTTP response status code.
+/// Returns: A [MultipleResponse] containing [TidalArtist] objects for the requested artists.
 Future<MultipleResponse<TidalArtist>> getMultipleArtistsImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,

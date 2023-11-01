@@ -8,17 +8,18 @@ const _getSingleArtistEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Fetches a single Tidal artist using the Tidal API.
+/// Fetches information about a single artist based on their [id] and [countryCode].
 ///
-/// [client] is an HTTP client for making the request.
-/// [tidalAuthToken] is the Tidal authentication token required for the request.
-/// [id] is the ID of the artist to retrieve.
-/// [countryCode] is the country code for the request.
+/// This method retrieves information about a single artist from the Tidal service
+/// using their unique [id] and the [countryCode] for the request.
 ///
-/// Returns a [TidalArtist] object representing the retrieved artist.
+/// Parameters:
+/// - [client]: The HTTP client used to make the API request.
+/// - [tidalAuthToken]: The authentication token required for the request.
+/// - [id]: The unique identifier of the artist to retrieve.
+/// - [countryCode]: The country code for the request.
 ///
-/// Throws [BadRequestTidalArtistError] if the HTTP response status code is 400, indicating a bad request.
-/// Throws [TidalArtistError] for any other non-200 HTTP response status code.
+/// Returns: A [TidalArtist] object containing information about the requested artist.
 Future<TidalArtist> getSingleArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
