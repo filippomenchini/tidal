@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
-import '../types/tidal_media.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../commons/handle_http_response.dart';
 import '../types/multiple_response.dart';
+import '../types/tidal_media.dart';
 
 const _getMultipleTracksEndpointUrl = 'https://openapi.tidal.com/tracks';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};

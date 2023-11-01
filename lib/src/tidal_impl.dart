@@ -4,17 +4,20 @@ import 'album/album_api.dart';
 import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
 import 'tidal_base.dart';
+import 'track/track_api.dart';
 
 /// An implementation of the [Tidal] interface that provides access to artist and album-related operations.
 class TidalImpl implements Tidal {
   final ArtistAPI artistAPI;
   final AlbumAPI albumAPI;
+  final TrackAPI trackAPI;
   final http.Client client;
 
   /// Creates a [TidalImpl] instance with the provided artist and album API implementations and an HTTP client.
   TidalImpl({
     required this.artistAPI,
     required this.albumAPI,
+    required this.trackAPI,
     required this.client,
   });
 
@@ -23,6 +26,9 @@ class TidalImpl implements Tidal {
 
   @override
   AlbumAPI get album => albumAPI;
+
+  @override
+  TrackAPI get track => trackAPI;
 
   @override
   void dispose() => client.close();
@@ -60,9 +66,15 @@ Future<Tidal> initializeImpl({
     tidalAuthToken: tidalAuthToken,
   );
 
+  final trackAPI = TrackAPIImpl(
+    client: client,
+    tidalAuthToken: tidalAuthToken,
+  );
+
   return TidalImpl(
     artistAPI: artistAPI,
     albumAPI: albumAPI,
+    trackAPI: trackAPI,
     client: client,
   );
 }
