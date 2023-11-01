@@ -10,7 +10,7 @@ A Dart library for connecting to and interacting with the Tidal Developer Portal
 ### Implemented APIs
 
 - [x] Authorization
-- [ ] Album API
+- [x] Album API
 - [x] Artist API
 - [ ] Track API
 - [ ] Video API
