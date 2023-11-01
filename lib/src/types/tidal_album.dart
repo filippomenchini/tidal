@@ -3,6 +3,30 @@ import 'package:equatable/equatable.dart';
 import 'tidal_artist.dart';
 import 'tidal_image.dart';
 
+/// Represents an album in the Tidal music service.
+///
+/// A [TidalAlbum] contains information about the album, including its ID, barcode ID, title,
+/// duration, release date, number of volumes, number of tracks, number of videos, type, copyright,
+/// artists, image cover, video cover, media metadata, and properties.
+///
+/// This class is used to represent album data retrieved from the Tidal service.
+///
+/// Parameters:
+/// - [id]: The unique identifier of the album.
+/// - [barcodeId]: The barcode ID of the album.
+/// - [title]: The title of the album.
+/// - [duration]: The duration of the album in seconds.
+/// - [releaseDate]: The release date of the album.
+/// - [numberOfVolumes]: The number of volumes in the album.
+/// - [numberOfTracks]: The number of tracks in the album.
+/// - [numberOfVideos]: The number of videos in the album.
+/// - [type]: The type of the album.
+/// - [copyright]: The copyright information related to the album.
+/// - [artists]: A list of artists who contributed to the album.
+/// - [imageCover]: A list of image covers associated with the album.
+/// - [videoCover]: A list of video covers associated with the album.
+/// - [mediaMetadata]: Metadata related to the media of the album.
+/// - [properties]: Additional properties of the album.
 class TidalAlbum extends Equatable {
   final String id;
   final String barcodeId;
@@ -42,6 +66,9 @@ class TidalAlbum extends Equatable {
   TidalArtist get mainArtist => artists.singleWhere((artist) => artist.main);
 
   /// Constructs a TidalAlbum object from JSON data.
+  ///
+  /// Parameters:
+  /// - [json]: The JSON map containing album data.
   TidalAlbum.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         barcodeId = json["barcodeId"],

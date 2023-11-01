@@ -5,17 +5,13 @@ import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
 import 'tidal_base.dart';
 
-/// Implementation of the Tidal music streaming service interface.
+/// An implementation of the [Tidal] interface that provides access to artist and album-related operations.
 class TidalImpl implements Tidal {
-  /// The implementation of the ArtistAPI interface.
   final ArtistAPI artistAPI;
-
-  /// The implementation of the AlbumAPI interface.
   final AlbumAPI albumAPI;
-
-  /// The implementation of the http client.
   final http.Client client;
 
+  /// Creates a [TidalImpl] instance with the provided artist and album API implementations and an HTTP client.
   TidalImpl({
     required this.artistAPI,
     required this.albumAPI,
@@ -34,8 +30,9 @@ class TidalImpl implements Tidal {
 
 /// Initializes and sets up a Tidal instance for making API requests.
 ///
-/// [clientId] is the client ID for authentication.
-/// [clientSecret] is the client secret for authentication.
+/// Parameters:
+/// - [clientId]: The client ID for authentication.
+/// - [clientSecret]: The client secret for authentication.
 ///
 /// Returns a [Tidal] instance for interacting with the Tidal service.
 Future<Tidal> initializeImpl({
@@ -43,6 +40,7 @@ Future<Tidal> initializeImpl({
   required String clientSecret,
 }) async {
   final client = http.Client();
+
   final currentDateTime = DateTime.now();
 
   final tidalAuthToken = await authorize(

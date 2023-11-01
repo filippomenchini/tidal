@@ -3,6 +3,30 @@ import 'package:equatable/equatable.dart';
 import 'tidal_artist.dart';
 import 'tidal_image.dart';
 
+/// Represents media information in the Tidal service.
+///
+/// A [TidalMedia] object contains details about media, including its ID, version, duration,
+/// title, copyright, artists involved, track and volume numbers, ISRC code, provider ID,
+/// album ID, artifact type, properties, media metadata, and an optional image.
+///
+/// This class is used to represent media data retrieved from the Tidal service.
+///
+/// Parameters:
+/// - [id]: The ID of the media.
+/// - [version]: The version of the media.
+/// - [duration]: The duration of the media in seconds.
+/// - [title]: The title of the media.
+/// - [copyright]: Copyright information related to the media.
+/// - [artists]: A list of artists involved in the media.
+/// - [trackNumber]: The track number of the media.
+/// - [volumeNumber]: The volume number of the media.
+/// - [isrc]: The ISRC (International Standard Recording Code) of the media.
+/// - [providerId]: The provider ID of the media.
+/// - [albumId]: The ID of the album to which the media belongs.
+/// - [artifactType]: The type of media artifact.
+/// - [properties]: Additional properties associated with the media.
+/// - [mediaMetadata]: Metadata associated with the media.
+/// - [image]: An optional image associated with the media.
 class TidalMedia extends Equatable {
   final String id;
   final String version;
@@ -38,6 +62,10 @@ class TidalMedia extends Equatable {
     this.image,
   });
 
+  /// Constructs a TidalMedia object from JSON data.
+  ///
+  /// Parameters:
+  /// - [json]: The JSON map containing media data.
   TidalMedia.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         version = json["version"],
@@ -71,7 +99,7 @@ class TidalMedia extends Equatable {
         providerId,
         albumId,
         artifactType,
-        mediaMetadata,
+        properties,
         mediaMetadata,
         image,
       ];
