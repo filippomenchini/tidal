@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import 'tidal_album.dart';
 import 'tidal_artist.dart';
 import 'tidal_image.dart';
 
@@ -18,6 +19,7 @@ import 'tidal_image.dart';
 /// - [title]: The title of the media.
 /// - [copyright]: Copyright information related to the media.
 /// - [artists]: A list of artists involved in the media.
+/// - [album]: The album that the media refers to.
 /// - [trackNumber]: The track number of the media.
 /// - [volumeNumber]: The volume number of the media.
 /// - [isrc]: The ISRC (International Standard Recording Code) of the media.
@@ -34,6 +36,7 @@ class TidalMedia extends Equatable {
   final String title;
   final String copyright;
   final List<TidalMediaArtist> artists;
+  final TidalBaseAlbum album;
   final int trackNumber;
   final int volumeNumber;
   final String isrc;
@@ -51,6 +54,7 @@ class TidalMedia extends Equatable {
     required this.title,
     required this.copyright,
     required this.artists,
+    required this.album,
     required this.trackNumber,
     required this.volumeNumber,
     required this.isrc,
@@ -75,6 +79,7 @@ class TidalMedia extends Equatable {
         artists = (json["artists"] as List)
             .map((e) => TidalMediaArtist.fromJson(e))
             .toList(),
+        album = TidalBaseAlbum.fromJson(json["album"]),
         trackNumber = json["trackNumber"],
         volumeNumber = json["volumeNumber"],
         isrc = json["isrc"],
@@ -93,6 +98,7 @@ class TidalMedia extends Equatable {
         title,
         copyright,
         artists,
+        album,
         trackNumber,
         volumeNumber,
         isrc,

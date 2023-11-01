@@ -3,9 +3,47 @@ import 'package:equatable/equatable.dart';
 import 'tidal_artist.dart';
 import 'tidal_image.dart';
 
+/// Represents the basic informations of an album in the Tidal music service.
+///
+/// Parameters:
+/// - [id]: The unique identifier of the album.
+/// - [title]: The title of the album.
+/// - [imageCover]: A list of image covers associated with the album.
+/// - [videoCover]: A list of video covers associated with the album.
+class TidalBaseAlbum extends Equatable {
+  final String id;
+  final String title;
+  final List<TidalImage> imageCover;
+  final List<TidalImage> videoCover;
+
+  const TidalBaseAlbum({
+    required this.id,
+    required this.title,
+    required this.imageCover,
+    required this.videoCover,
+  });
+
+  /// Constructs a TidalBaseAlbum object from JSON data.
+  ///
+  /// Parameters:
+  /// - [json]: The JSON map containing album data.
+  TidalBaseAlbum.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        title = json["title"],
+        imageCover = (json["imageCover"] as List)
+            .map((e) => TidalImage.fromJson(e))
+            .toList(),
+        videoCover = (json["videoCover"] as List)
+            .map((e) => TidalImage.fromJson(e))
+            .toList();
+
+  @override
+  List<Object?> get props => [id, title, imageCover, videoCover];
+}
+
 /// Represents an album in the Tidal music service.
 ///
-/// A [TidalAlbum] contains information about the album, including its ID, barcode ID, title,
+/// A [TidalAlbum] is an extendion of [TidalBaseAlbum] and contains information about the album, including its ID, barcode ID, title,
 /// duration, release date, number of volumes, number of tracks, number of videos, type, copyright,
 /// artists, image cover, video cover, media metadata, and properties.
 ///
@@ -27,10 +65,8 @@ import 'tidal_image.dart';
 /// - [videoCover]: A list of video covers associated with the album.
 /// - [mediaMetadata]: Metadata related to the media of the album.
 /// - [properties]: Additional properties of the album.
-class TidalAlbum extends Equatable {
-  final String id;
+class TidalAlbum extends TidalBaseAlbum {
   final String barcodeId;
-  final String title;
   final int duration;
   final DateTime releaseDate;
   final int numberOfVolumes;
@@ -39,15 +75,13 @@ class TidalAlbum extends Equatable {
   final String type;
   final String copyright;
   final List<TidalMediaArtist> artists;
-  final List<TidalImage> imageCover;
-  final List<TidalImage> videoCover;
   final Map<String, dynamic> mediaMetadata;
   final Map<String, dynamic> properties;
 
   const TidalAlbum({
-    required this.id,
+    required super.id,
     required this.barcodeId,
-    required this.title,
+    required super.title,
     required this.duration,
     required this.releaseDate,
     required this.numberOfVolumes,
@@ -56,8 +90,8 @@ class TidalAlbum extends Equatable {
     required this.type,
     required this.copyright,
     required this.artists,
-    required this.imageCover,
-    required this.videoCover,
+    required super.imageCover,
+    required super.videoCover,
     required this.mediaMetadata,
     required this.properties,
   });
@@ -70,9 +104,7 @@ class TidalAlbum extends Equatable {
   /// Parameters:
   /// - [json]: The JSON map containing album data.
   TidalAlbum.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        barcodeId = json["barcodeId"],
-        title = json["title"],
+      : barcodeId = json["barcodeId"],
         duration = json["duration"],
         releaseDate = DateTime.parse(json["releaseDate"]),
         numberOfVolumes = json["numberOfVolumes"],
@@ -80,23 +112,17 @@ class TidalAlbum extends Equatable {
         numberOfVideos = json["numberOfVideos"],
         type = json["type"],
         copyright = json["copyright"],
-        imageCover = (json["imageCover"] as List)
-            .map((e) => TidalImage.fromJson(e))
-            .toList(),
-        videoCover = (json["videoCover"] as List)
-            .map((e) => TidalImage.fromJson(e))
-            .toList(),
         mediaMetadata = json["mediaMetadata"],
         properties = json["properties"],
         artists = (json["artists"] as List)
             .map((e) => TidalMediaArtist.fromJson(e))
-            .toList();
+            .toList(),
+        super.fromJson(json);
 
   @override
   List<Object?> get props => [
-        id,
+        ...super.props,
         barcodeId,
-        title,
         duration,
         releaseDate,
         numberOfVolumes,
@@ -105,8 +131,6 @@ class TidalAlbum extends Equatable {
         type,
         copyright,
         artists,
-        imageCover,
-        videoCover,
         mediaMetadata,
         properties,
       ];

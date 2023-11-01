@@ -5,6 +5,7 @@ import 'package:tidal/src/album/get_album_items_impl.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
 import 'package:tidal/src/types/multiple_response.dart';
 import 'package:tidal/src/types/multiple_response_item.dart';
+import 'package:tidal/src/types/tidal_album.dart';
 import 'package:tidal/src/types/tidal_artist.dart';
 import 'package:tidal/src/types/tidal_image.dart';
 import 'package:tidal/src/types/tidal_media.dart';
@@ -62,6 +63,26 @@ void main() {
                     ],
                   ),
                 ],
+                album: TidalBaseAlbum(
+                  id: "75413011",
+                  title: "4:44",
+                  imageCover: [
+                    TidalImage(
+                      url:
+                          "https://resources.tidal.com/images/717dfdae/beb0/4aea/a553/a70064c30386/80x80.jpg",
+                      width: 80,
+                      height: 80,
+                    ),
+                  ],
+                  videoCover: [
+                    TidalImage(
+                      url:
+                          "https://resources.tidal.com/images/717dfdae/beb0/4aea/a553/a70064c30386/80x80.jpg",
+                      width: 80,
+                      height: 80,
+                    ),
+                  ],
+                ),
                 trackNumber: 1,
                 volumeNumber: 1,
                 isrc: "QMJMT1701229",
