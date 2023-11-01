@@ -10,23 +10,22 @@ const _getAlbumsByBarcodeIdEndpointUrl =
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Fetches multiple albums by their barcode identifier from Tidal using an HTTP request.
+/// Fetches multiple albums associated with a specific barcode ID from Tidal using an HTTP request.
 ///
-/// This method uses the HTTP [client] to make a request to obtain multiple albums
-/// identified by their [barcodeId] from Tidal. It requires a [tidalAuthToken] for
-/// authentication, the [barcodeId], and the [countryCode].
+/// This method utilizes the HTTP [client] to make a request for fetching multiple albums
+/// linked to a particular barcode ID identified by [barcodeId] from Tidal. It requires a [tidalAuthToken] for
+/// authentication, the [barcodeId], and [countryCode].
 ///
-/// If the request is successful, the albums are returned as an instance of
-/// [MultipleTidalAlbums].
+/// If the request is successful, the albums are returned as a [MultipleResponse] of [TidalAlbum].
 ///
 /// Parameters:
 /// - [client]: The HTTP client used for the request.
 /// - [tidalAuthToken]: The Tidal authentication token.
-/// - [barcodeId]: The barcode identifier of the albums to be fetched.
+/// - [barcodeId]: The barcode ID of the albums to be fetched.
 /// - [countryCode]: The country code for the request.
 ///
-/// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
-Future<MultipleResponse<TidalAlbum>> getAlbumsByBarcodeId(
+/// Returns: A [MultipleResponse] of [TidalAlbum] objects containing the retrieved albums.
+Future<MultipleResponse<TidalAlbum>> getAlbumsByBarcodeIdImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required String barcodeId,

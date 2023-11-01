@@ -9,20 +9,13 @@ const _getMultipleAlbumsEndpointUrl = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Fetches multiple albums by a specific artist from Tidal using an HTTP request.
+/// Fetches multiple albums associated with a specific artist from Tidal using an HTTP request.
 ///
-/// This method utilizes the HTTP [client] to make a request to obtain multiple
-/// albums associated with a particular [artistId] from Tidal. It requires a
-/// [tidalAuthToken] for authentication, the [artistId] of the artist, the
-/// [countryCode], and optional parameters for [offset] and [limit] to paginate
-/// the results.
+/// This method utilizes the HTTP [client] to make a request for fetching multiple albums
+/// linked to a particular artist identified by [artistId] from Tidal. It requires a [tidalAuthToken] for
+/// authentication, the [artistId], [countryCode], and optional [offset] and [limit] parameters.
 ///
-/// The optional [offset] parameter specifies the starting point for fetching
-/// albums, while the [limit] parameter defines the maximum number of albums to
-/// retrieve in a single request.
-///
-/// If the request is successful, the albums are returned as an instance of
-/// [MultipleTidalAlbums].
+/// If the request is successful, the albums are returned as a [MultipleResponse] of [TidalAlbum].
 ///
 /// Parameters:
 /// - [client]: The HTTP client used for the request.
@@ -32,7 +25,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 /// - [offset]: Optional. The starting point for fetching albums.
 /// - [limit]: Optional. The maximum number of albums to retrieve.
 ///
-/// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
+/// Returns: A [MultipleResponse] of [TidalAlbum] objects containing the retrieved albums.
 Future<MultipleResponse<TidalAlbum>> getAlbumsByArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,

@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 
+import 'album/album_api.dart';
 import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
 import 'tidal_base.dart';
@@ -9,16 +10,23 @@ class TidalImpl implements Tidal {
   /// The implementation of the ArtistAPI interface.
   final ArtistAPI artistAPI;
 
+  /// The implementation of the AlbumAPI interface.
+  final AlbumAPI albumAPI;
+
   /// The implementation of the http client.
   final http.Client client;
 
   TidalImpl({
     required this.artistAPI,
+    required this.albumAPI,
     required this.client,
   });
 
   @override
   ArtistAPI get artist => artistAPI;
+
+  @override
+  AlbumAPI get album => albumAPI;
 
   @override
   void dispose() => client.close();
@@ -49,8 +57,14 @@ Future<Tidal> initializeImpl({
     tidalAuthToken: tidalAuthToken,
   );
 
+  final albumAPI = AlbumAPIImpl(
+    client: client,
+    tidalAuthToken: tidalAuthToken,
+  );
+
   return TidalImpl(
     artistAPI: artistAPI,
+    albumAPI: albumAPI,
     client: client,
   );
 }

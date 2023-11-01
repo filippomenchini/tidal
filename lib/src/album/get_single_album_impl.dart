@@ -8,27 +8,21 @@ const _getSingleAlbumEndpointUrl = 'https://openapi.tidal.com/albums';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Gets a single album from Tidal using an HTTP request.
+/// Fetches a single album by its ID from Tidal using an HTTP request.
 ///
-/// This method uses the HTTP [client] to make a request to obtain a specific
-/// album from Tidal. It requires a [tidalAuthToken] for authentication, the
-/// [id] of the album, and the [countryCode].
+/// This method utilizes the HTTP [client] to make a request for fetching a single album
+/// identified by [id] from Tidal. It requires a [tidalAuthToken] for authentication,
+/// the [id] of the album to be retrieved, and the [countryCode].
 ///
-/// If the request is successful and returns an HTTP status of 200, the album
-/// is extracted from the received JSON data and returned as a [TidalAlbum] object.
-///
-/// If the request returns an HTTP status of 400, specific errors for incorrect
-/// requests are returned as [BadRequestTidalAlbumError] objects.
-///
-/// Otherwise, in case of generic errors, [TidalAlbumError] objects are returned.
+/// If the request is successful, the album is returned as a [TidalAlbum] object.
 ///
 /// Parameters:
 /// - [client]: The HTTP client used for the request.
 /// - [tidalAuthToken]: The Tidal authentication token.
-/// - [id]: The identifier of the album to fetch.
+/// - [id]: The ID of the album to be fetched.
 /// - [countryCode]: The country code for the request.
 ///
-/// Returns: An instance of [TidalAlbum] obtained from the Tidal response.
+/// Returns: A [TidalAlbum] object representing the retrieved album.
 Future<TidalAlbum> getSingleAlbumImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,

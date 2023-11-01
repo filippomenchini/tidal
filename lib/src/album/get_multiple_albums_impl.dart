@@ -11,20 +11,19 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
 /// Fetches multiple albums by their IDs from Tidal using an HTTP request.
 ///
-/// This method utilizes the HTTP [client] to make a request to obtain multiple
-/// albums identified by their [ids] from Tidal. It requires a [tidalAuthToken] for
-/// authentication, a list of [ids], and the [countryCode].
+/// This method utilizes the HTTP [client] to make a request for fetching multiple albums
+/// identified by a list of [ids] from Tidal. It requires a [tidalAuthToken] for
+/// authentication, the list of [ids], and the [countryCode].
 ///
-/// If the request is successful, the albums are returned as an instance of
-/// [MultipleTidalAlbums].
+/// If the request is successful, the albums are returned as a [MultipleResponse] of [TidalAlbum].
 ///
 /// Parameters:
 /// - [client]: The HTTP client used for the request.
 /// - [tidalAuthToken]: The Tidal authentication token.
-/// - [ids]: A list of album identifiers to be fetched.
+/// - [ids]: A list of album IDs to be fetched.
 /// - [countryCode]: The country code for the request.
 ///
-/// Returns: An instance of [MultipleTidalAlbums] containing the retrieved albums.
+/// Returns: A [MultipleResponse] of [TidalAlbum] objects containing the retrieved albums.
 Future<MultipleResponse<TidalAlbum>> getMultipleAlbumsImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,

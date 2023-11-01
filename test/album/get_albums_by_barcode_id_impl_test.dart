@@ -96,7 +96,7 @@ void main() {
       );
 
       // Act
-      final result = await getAlbumsByBarcodeId(
+      final result = await getAlbumsByBarcodeIdImpl(
         client,
         tidalAuthToken: tidalAuthToken,
         barcodeId: barcodeId,

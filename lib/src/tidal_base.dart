@@ -1,3 +1,4 @@
+import 'album/album_api.dart';
 import 'artist/artist_api.dart';
 import 'tidal_impl.dart';
 
@@ -5,6 +6,9 @@ import 'tidal_impl.dart';
 abstract class Tidal {
   /// Provides access to artist-related operations through the [ArtistAPI] interface.
   ArtistAPI get artist;
+
+  /// Privdes access to album-related operations through the [AlbumAPI] interface.
+  AlbumAPI get album;
 
   /// Initializes and sets up a Tidal instance for making API requests.
   ///
