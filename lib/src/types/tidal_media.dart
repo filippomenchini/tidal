@@ -27,8 +27,8 @@ import 'tidal_image.dart';
 /// - [albumId]: The ID of the album to which the media belongs.
 /// - [artifactType]: The type of media artifact.
 /// - [properties]: Additional properties associated with the media.
-/// - [mediaMetadata]: Metadata associated with the media.
-/// - [image]: An optional image associated with the media.
+/// - [mediaMetadata]: Optional metadata associated with the media.
+/// - [image]: An optional list of images associated with the media.
 class TidalMedia extends Equatable {
   final String id;
   final String version;
@@ -44,8 +44,8 @@ class TidalMedia extends Equatable {
   final String albumId;
   final String artifactType;
   final Map<String, dynamic> properties;
-  final Map<String, dynamic> mediaMetadata;
-  final TidalImage? image;
+  final Map<String, dynamic>? mediaMetadata;
+  final List<TidalImage>? image;
 
   TidalMedia({
     required this.id,
@@ -62,7 +62,7 @@ class TidalMedia extends Equatable {
     required this.albumId,
     required this.artifactType,
     required this.properties,
-    required this.mediaMetadata,
+    this.mediaMetadata,
     this.image,
   });
 
@@ -88,7 +88,11 @@ class TidalMedia extends Equatable {
         artifactType = json["artifactType"],
         properties = json["properties"],
         mediaMetadata = json["mediaMetadata"],
-        image = json["image"];
+        image = json["image"] != null
+            ? (json["image"] as List)
+                .map((e) => TidalImage.fromJson(e))
+                .toList()
+            : null;
 
   @override
   List<Object?> get props => [
