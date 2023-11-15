@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:tidal/src/track/get_single_track_impl.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../types/multiple_response.dart';
@@ -60,7 +61,9 @@ class TrackAPIImpl implements TrackAPI {
     required String id,
     required String countryCode,
   }) =>
-      getSingleTrack(
+      getSingleTrackImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
         id: id,
         countryCode: countryCode,
       );
