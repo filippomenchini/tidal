@@ -1,11 +1,11 @@
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/video/video_api.dart';
 
 import 'album/album_api.dart';
 import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
 import 'tidal_base.dart';
 import 'track/track_api.dart';
+import 'video/video_api.dart';
 
 /// An implementation of the [Tidal] interface that provides access to artist and album-related operations.
 class TidalImpl implements Tidal {
