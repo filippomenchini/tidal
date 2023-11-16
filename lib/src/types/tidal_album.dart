@@ -39,6 +39,14 @@ class TidalBaseAlbum extends Equatable {
 
   @override
   List<Object?> get props => [id, title, imageCover, videoCover];
+
+  @override
+  String toString() {
+    String string = "";
+    string += "ID:$id\n";
+    string += "TITLE:$title\n";
+    return string;
+  }
 }
 
 /// Represents an album in the Tidal music service.

@@ -31,17 +31,17 @@ import 'tidal_image.dart';
 /// - [image]: An optional list of images associated with the media.
 class TidalMedia extends Equatable {
   final String id;
-  final String version;
+  final String? version;
   final int duration;
   final String title;
-  final String copyright;
+  final String? copyright;
   final List<TidalMediaArtist> artists;
-  final TidalBaseAlbum album;
+  final TidalBaseAlbum? album;
   final int trackNumber;
   final int volumeNumber;
   final String isrc;
-  final String providerId;
-  final String albumId;
+  final String? providerId;
+  final String? albumId;
   final String artifactType;
   final Map<String, dynamic> properties;
   final Map<String, dynamic>? mediaMetadata;
@@ -49,17 +49,17 @@ class TidalMedia extends Equatable {
 
   TidalMedia({
     required this.id,
-    required this.version,
+    this.version,
     required this.duration,
     required this.title,
-    required this.copyright,
+    this.copyright,
     required this.artists,
-    required this.album,
+    this.album,
     required this.trackNumber,
     required this.volumeNumber,
     required this.isrc,
-    required this.providerId,
-    required this.albumId,
+    this.providerId,
+    this.albumId,
     required this.artifactType,
     required this.properties,
     this.mediaMetadata,
@@ -79,7 +79,9 @@ class TidalMedia extends Equatable {
         artists = (json["artists"] as List)
             .map((e) => TidalMediaArtist.fromJson(e))
             .toList(),
-        album = TidalBaseAlbum.fromJson(json["album"]),
+        album = json["album"] != null
+            ? TidalBaseAlbum.fromJson(json["album"])
+            : null,
         trackNumber = json["trackNumber"],
         volumeNumber = json["volumeNumber"],
         isrc = json["isrc"],
@@ -113,4 +115,14 @@ class TidalMedia extends Equatable {
         mediaMetadata,
         image,
       ];
+
+  @override
+  String toString() {
+    String string = "";
+    string += "TYPE:$artifactType\n";
+    string += "TITLE:$title\n";
+    string += "ARTISTS:\n$artists\n";
+    string += "ALBUM:{\n${album.toString()}}";
+    return string;
+  }
 }

@@ -41,4 +41,14 @@ class MultipleResponseItem<T> extends Equatable {
 
   @override
   List<Object?> get props => [id, status, message, data];
+
+  @override
+  String toString() {
+    String string = "";
+    string += "ID:$id\n";
+    string += "STATUS:$status\n";
+    string += "MESSAGE:$message\n";
+    string += "DATA:{\n$data\n}\n";
+    return string;
+  }
 }
