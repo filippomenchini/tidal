@@ -4,6 +4,11 @@ import 'tidal_impl.dart';
 import 'track/track_api.dart';
 import 'video/video_api.dart';
 
+export 'album/album_api.dart' show AlbumAPI;
+export 'artist/artist_api.dart' show ArtistAPI;
+export 'track/track_api.dart' show TrackAPI;
+export 'video/video_api.dart' show VideoAPI;
+
 /// The entry point for interacting with the Tidal service.
 ///
 /// The [Tidal] class provides access to different aspects of the Tidal service
