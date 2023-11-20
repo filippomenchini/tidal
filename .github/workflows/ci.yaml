@@ -19,3 +19,23 @@ jobs:
 
       - name: Run tests
         run: dart test
+
+  e2e-tests:
+    name: "End-to-end tests"
+    runs-on: "ubuntu-latest"
+    needs: unit-tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Dart setup
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run end-to-end tests
+        run: |
+          TIDAL_CLIENT_ID=`echo ${{ secrets.TIDAL_CLIENT_ID }} | base64 --decode`
+          TIDAL_CLIENT_SECRET=`echo ${{ secrets.TIDAL_CLIENT_SECRET }} | base64 --decode`
+          dart run --define=TIDAL_CLIENT_ID=$TIDAL_CLIENT_ID --define=TIDAL_CLIENT_SECRET=$TIDAL_CLIENT_SECRET example/example.dart
