@@ -14,11 +14,11 @@ import 'multiple_response_item.dart';
 /// - [metadata]: A map containing additional metadata related to the response.
 class MultipleResponse<T> extends Equatable {
   final List<MultipleResponseItem<T>> items;
-  final Map<String, dynamic> metadata;
+  final Map<String, dynamic>? metadata;
 
   const MultipleResponse({
     required this.items,
-    required this.metadata,
+    this.metadata,
   });
 
   /// Creates a [MultipleResponse] from a JSON map, using the provided [itemFactory] function
@@ -30,7 +30,8 @@ class MultipleResponse<T> extends Equatable {
   MultipleResponse.fromJson({
     required Map<String, dynamic> json,
     required T Function(Map<String, dynamic> json) itemFactory,
-  })  : items = (json is List ? json as List : json["data"] as List)
+    String? itemsFieldName,
+  })  : items = (json[itemsFieldName ?? "data"] as List)
             .map((e) => MultipleResponseItem.fromJson(
                 json: e, itemFactory: itemFactory))
             .toList(),

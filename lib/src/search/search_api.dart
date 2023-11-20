@@ -1,4 +1,20 @@
+// ignore_for_file: constant_identifier_names
+
 import '../types/tidal_search_response.dart';
+
+enum TidalSearchType {
+  UNDEFINED,
+  ARTISTS,
+  ALBUMS,
+  TRACKS,
+  VIDEOS,
+}
+
+enum TidalSearchPopularity {
+  UNDEFINED,
+  WORLDWIDE,
+  COUNTRY,
+}
 
 /// An interface for searching Tidal catalog items.
 abstract class SearchAPI {
@@ -18,7 +34,7 @@ abstract class SearchAPI {
     required String countryCode,
     int offset = 0,
     int limit = 10,
-    String? type,
-    String? popularity,
+    TidalSearchType type = TidalSearchType.UNDEFINED,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
   });
 }

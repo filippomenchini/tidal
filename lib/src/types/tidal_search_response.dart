@@ -31,20 +31,24 @@ class TidalSearchResponse extends Equatable {
   /// - [json]: The JSON map containing search data.
   TidalSearchResponse.fromJson(Map<String, dynamic> json)
       : albums = MultipleResponse.fromJson(
-          json: json["albums"],
+          json: json,
           itemFactory: TidalAlbum.fromJson,
+          itemsFieldName: "albums",
         ),
         artists = MultipleResponse.fromJson(
-          json: json["artists"],
+          json: json,
           itemFactory: TidalArtist.fromJson,
+          itemsFieldName: "artists",
         ),
         tracks = MultipleResponse.fromJson(
-          json: json["tracks"],
+          json: json,
           itemFactory: TidalMedia.fromJson,
+          itemsFieldName: "tracks",
         ),
         videos = MultipleResponse.fromJson(
-          json: json["videos"],
+          json: json,
           itemFactory: TidalMedia.fromJson,
+          itemsFieldName: "videos",
         );
 
   @override
