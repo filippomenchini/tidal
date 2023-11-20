@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
+import '../search/search_api.dart';
+import '../search/search_for_catalog_items_impl.dart';
 import '../types/multiple_response.dart';
 import '../types/tidal_album.dart';
 import 'get_albums_by_artist_impl.dart';
@@ -75,6 +77,24 @@ abstract class AlbumAPI {
     required String barcodeId,
     required String countryCode,
   });
+
+  /// Searches albums by given query string.
+  ///
+  /// This methods returns multiple albums by searching the database with the [query] parameter in a specific [countryCode].
+  ///
+  /// Parameters:
+  /// - [query]: The query string to search.
+  /// - [countryCode]: The country code for the request.
+  /// - [offset]: Optional. The starting point for fetching albums.
+  /// - [limit]: Optional. The maximum number of albums to retrieve.
+  /// - [popularity]: Optional. The level popularity of the searched album.
+  Future<MultipleResponse<TidalAlbum>> search({
+    required String query,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  });
 }
 
 /// An implementation of the [AlbumAPI] interface that interacts with the Tidal API.
@@ -136,4 +156,23 @@ class AlbumAPIImpl implements AlbumAPI {
         id: albumId,
         countryCode: countryCode,
       );
+
+  @override
+  Future<MultipleResponse<TidalAlbum>> search({
+    required String query,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  }) =>
+      searchForCatalogItemsImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        query: query,
+        countryCode: countryCode,
+        offset: offset,
+        limit: limit,
+        popularity: popularity,
+        type: TidalSearchType.ALBUMS,
+      ).then((result) => result.albums);
 }

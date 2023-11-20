@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 
 import '../authorization/tidal_auth_token.dart';
+import '../search/search_api.dart';
+import '../search/search_for_catalog_items_impl.dart';
 import '../types/multiple_response.dart';
 import '../types/tidal_artist.dart';
 import 'get_multiple_artists_impl.dart';
@@ -40,6 +42,24 @@ abstract class ArtistAPI {
     required List<String> ids,
     required String countryCode,
   });
+
+  /// Searches artists by given query string.
+  ///
+  /// This methods returns multiple artists by searching the database with the [query] parameter in a specific [countryCode].
+  ///
+  /// Parameters:
+  /// - [query]: The query string to search.
+  /// - [countryCode]: The country code for the request.
+  /// - [offset]: Optional. The starting point for fetching albums.
+  /// - [limit]: Optional. The maximum number of artists to retrieve.
+  /// - [popularity]: Optional. The level popularity of the searched artists.
+  Future<MultipleResponse<TidalArtist>> search({
+    required String query,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  });
 }
 
 /// An implementation of the [ArtistAPI] interface that interacts with the Tidal API.
@@ -75,4 +95,23 @@ class ArtistAPIImpl implements ArtistAPI {
         id: id,
         countryCode: countryCode,
       );
+
+  @override
+  Future<MultipleResponse<TidalArtist>> search({
+    required String query,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  }) =>
+      searchForCatalogItemsImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        query: query,
+        countryCode: countryCode,
+        offset: offset,
+        limit: limit,
+        popularity: popularity,
+        type: TidalSearchType.ARTISTS,
+      ).then((result) => result.artists);
 }
