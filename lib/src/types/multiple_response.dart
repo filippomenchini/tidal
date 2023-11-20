@@ -30,7 +30,7 @@ class MultipleResponse<T> extends Equatable {
   MultipleResponse.fromJson({
     required Map<String, dynamic> json,
     required T Function(Map<String, dynamic> json) itemFactory,
-  })  : items = (json["data"] as List)
+  })  : items = (json is List ? json as List : json["data"] as List)
             .map((e) => MultipleResponseItem.fromJson(
                 json: e, itemFactory: itemFactory))
             .toList(),
