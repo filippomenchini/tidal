@@ -16,13 +16,13 @@ class MultipleResponseItem<T> extends Equatable {
   final String id;
   final int status;
   final String message;
-  final T data;
+  final T? data;
 
   const MultipleResponseItem({
     required this.id,
     required this.status,
     required this.message,
-    required this.data,
+    this.data,
   });
 
   /// Creates a [MultipleResponseItem] from a JSON map, using the provided [itemFactory] function
@@ -37,7 +37,7 @@ class MultipleResponseItem<T> extends Equatable {
   })  : id = json["id"],
         status = json["status"],
         message = json["message"],
-        data = itemFactory(json["resource"]);
+        data = json["resource"] != null ? itemFactory(json["resource"]) : null;
 
   @override
   List<Object?> get props => [id, status, message, data];

@@ -9,7 +9,8 @@ export 'album/album_api.dart' show AlbumAPI;
 export 'artist/artist_api.dart' show ArtistAPI;
 export 'track/track_api.dart' show TrackAPI;
 export 'video/video_api.dart' show VideoAPI;
-export 'search/search_api.dart' show SearchAPI;
+export 'search/search_api.dart'
+    show SearchAPI, TidalSearchPopularity, TidalSearchType;
 
 /// The entry point for interacting with the Tidal service.
 ///
