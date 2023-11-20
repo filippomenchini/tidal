@@ -14,7 +14,7 @@ A Dart library for connecting to and interacting with the Tidal Developer Portal
 - [x] Artist API
 - [x] Track API
 - [x] Video API
-- [ ] Search API
+- [x] Search API
 
 ## Getting Started
 
