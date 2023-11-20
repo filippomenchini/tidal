@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'album/album_api.dart';
 import 'artist/artist_api.dart';
 import 'authorization/authorize.dart';
+import 'search/search_api.dart';
 import 'tidal_base.dart';
 import 'track/track_api.dart';
 import 'video/video_api.dart';
@@ -13,6 +14,7 @@ class TidalImpl implements Tidal {
   final AlbumAPI albumAPI;
   final TrackAPI trackAPI;
   final VideoAPI videoAPI;
+  final SearchAPI searchAPI;
   final http.Client client;
 
   /// Creates a [TidalImpl] instance with the provided artist and album API implementations and an HTTP client.
@@ -21,6 +23,7 @@ class TidalImpl implements Tidal {
     required this.albumAPI,
     required this.trackAPI,
     required this.videoAPI,
+    required this.searchAPI,
     required this.client,
   });
 
@@ -35,6 +38,9 @@ class TidalImpl implements Tidal {
 
   @override
   VideoAPI get video => videoAPI;
+
+  @override
+  SearchAPI get search => searchAPI;
 
   @override
   void dispose() => client.close();
@@ -82,11 +88,17 @@ Future<Tidal> initializeImpl({
     tidalAuthToken: tidalAuthToken,
   );
 
+  final searchAPI = SearchAPIImpl(
+    client: client,
+    tidalAuthToken: tidalAuthToken,
+  );
+
   return TidalImpl(
     artistAPI: artistAPI,
     albumAPI: albumAPI,
     trackAPI: trackAPI,
     videoAPI: videoAPI,
+    searchAPI: searchAPI,
     client: client,
   );
 }

@@ -3,11 +3,13 @@ import 'artist/artist_api.dart';
 import 'tidal_impl.dart';
 import 'track/track_api.dart';
 import 'video/video_api.dart';
+import 'search/search_api.dart';
 
 export 'album/album_api.dart' show AlbumAPI;
 export 'artist/artist_api.dart' show ArtistAPI;
 export 'track/track_api.dart' show TrackAPI;
 export 'video/video_api.dart' show VideoAPI;
+export 'search/search_api.dart' show SearchAPI;
 
 /// The entry point for interacting with the Tidal service.
 ///
@@ -27,6 +29,9 @@ abstract class Tidal {
 
   /// Provides access to video-related operations through the [VideoAPI] interface.
   VideoAPI get video;
+
+  /// Provides access to search-related operations through the [SearchAPI] interface.
+  SearchAPI get search;
 
   /// Initializes and sets up a Tidal instance for making API requests.
   ///

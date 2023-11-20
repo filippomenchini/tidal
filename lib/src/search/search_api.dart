@@ -1,6 +1,9 @@
 // ignore_for_file: constant_identifier_names
+import 'package:http/http.dart' as http;
 
+import '../authorization/tidal_auth_token.dart';
 import '../types/tidal_search_response.dart';
+import 'search_for_catalog_items_impl.dart';
 
 enum TidalSearchType {
   UNDEFINED,
@@ -37,4 +40,32 @@ abstract class SearchAPI {
     TidalSearchType type = TidalSearchType.UNDEFINED,
     TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
   });
+}
+
+/// An implementation of the [SearchAPI] interface for accessing Tidal search interface.
+class SearchAPIImpl implements SearchAPI {
+  final http.Client client;
+  final TidalAuthToken tidalAuthToken;
+
+  /// Creates a [SearchAPIImpl] instance with the specified [client] and [tidalAuthToken].
+  const SearchAPIImpl({
+    required this.client,
+    required this.tidalAuthToken,
+  });
+
+  @override
+  Future<TidalSearchResponse> searchForCatalogItems({
+    required String query,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+    TidalSearchType type = TidalSearchType.UNDEFINED,
+    TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  }) =>
+      searchForCatalogItemsImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        query: query,
+        countryCode: countryCode,
+      );
 }
