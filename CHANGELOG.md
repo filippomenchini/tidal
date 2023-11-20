@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Added missing docs on search enums.
+
 ## 0.2.0
 
 - Implemented search APIs.

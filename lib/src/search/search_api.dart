@@ -5,17 +5,33 @@ import '../authorization/tidal_auth_token.dart';
 import '../types/tidal_search_response.dart';
 import 'search_for_catalog_items_impl.dart';
 
+/// Enum representing the types of Tidal catalog items that can be searched.
 enum TidalSearchType {
+  /// Undefined or unspecified search type.
   UNDEFINED,
+
+  /// Search type for artists.
   ARTISTS,
+
+  /// Search type for albums.
   ALBUMS,
+
+  /// Search type for tracks.
   TRACKS,
+
+  /// Search type for videos.
   VIDEOS,
 }
 
+/// Enum representing the popularity levels for Tidal catalog item searches.
 enum TidalSearchPopularity {
+  /// Undefined or unspecified popularity level.
   UNDEFINED,
+
+  /// Worldwide popularity level.
   WORLDWIDE,
+
+  /// Country-specific popularity level.
   COUNTRY,
 }
 
