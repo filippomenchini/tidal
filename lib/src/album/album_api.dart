@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:tidal/src/album/get_similar_albums_for_given_album_impl.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -95,6 +96,23 @@ abstract class AlbumAPI {
     int limit = 10,
     TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
   });
+
+  /// Retrieves a list of similar albums for a given album.
+  ///
+  /// Parameters:
+  /// - [id]: The unique identifier of the target album.
+  /// - [countryCode]: The country code for which the search is performed.
+  /// - [offset]: The index from which to start retrieving similar albums (default is 0).
+  /// - [limit]: The maximum number of similar albums to retrieve (default is 10).
+  ///
+  /// Returns:
+  /// A [Future<List<String>>] representing the unique identifiers of similar albums.
+  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+  });
 }
 
 /// An implementation of the [AlbumAPI] interface that interacts with the Tidal API.
@@ -175,4 +193,18 @@ class AlbumAPIImpl implements AlbumAPI {
         popularity: popularity,
         type: TidalSearchType.ALBUMS,
       ).then((result) => result.albums);
+
+  @override
+  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+  }) =>
+      getSimilarAlbumsForGivenAlbumImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        id: id,
+        countryCode: countryCode,
+      );
 }
