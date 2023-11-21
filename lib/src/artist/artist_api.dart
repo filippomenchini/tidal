@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:tidal/src/artist/get_similar_artist_for_given_artist.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -60,6 +61,23 @@ abstract class ArtistAPI {
     int limit = 10,
     TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
   });
+
+  /// Retrieves a list of similar artists for a given album.
+  ///
+  /// Parameters:
+  /// - [id]: The unique identifier of the target artist.
+  /// - [countryCode]: The country code for which the search is performed.
+  /// - [offset]: The index from which to start retrieving similar artists (default is 0).
+  /// - [limit]: The maximum number of similar artists to retrieve (default is 10).
+  ///
+  /// Returns:
+  /// A [Future<List<String>>] representing the unique identifiers of similar artists.
+  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+  });
 }
 
 /// An implementation of the [ArtistAPI] interface that interacts with the Tidal API.
@@ -114,4 +132,18 @@ class ArtistAPIImpl implements ArtistAPI {
         popularity: popularity,
         type: TidalSearchType.ARTISTS,
       ).then((result) => result.artists);
+
+  @override
+  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+  }) =>
+      getSimilarArtistsForGivenArtistsImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        id: id,
+        countryCode: countryCode,
+      );
 }
