@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/artist/get_similar_artists_for_given_artist.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -7,6 +6,7 @@ import '../search/search_for_catalog_items_impl.dart';
 import '../types/multiple_response.dart';
 import '../types/tidal_artist.dart';
 import 'get_multiple_artists_impl.dart';
+import 'get_similar_artists_for_given_artist.dart';
 import 'get_single_artist_impl.dart';
 
 /// An abstract interface for accessing artist-related operations in the Tidal service.

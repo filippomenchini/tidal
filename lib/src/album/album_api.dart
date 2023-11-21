@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/album/get_similar_albums_for_given_album_impl.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -9,6 +8,7 @@ import '../types/tidal_album.dart';
 import 'get_albums_by_artist_impl.dart';
 import 'get_albums_by_barcode_id_impl.dart';
 import 'get_multiple_albums_impl.dart';
+import 'get_similar_albums_for_given_album_impl.dart';
 import 'get_single_album_impl.dart';
 
 /// An abstract class that defines the contract for interacting with Tidal album-related operations.

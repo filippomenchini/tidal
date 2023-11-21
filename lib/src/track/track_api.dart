@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/track/get_similar_tracks_for_given_track.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -7,6 +6,7 @@ import '../search/search_for_catalog_items_impl.dart';
 import '../types/multiple_response.dart';
 import '../types/tidal_media.dart';
 import 'get_multiple_tracks_impl.dart';
+import 'get_similar_tracks_for_given_track.dart';
 import 'get_single_track_impl.dart';
 
 /// An abstract class defining the methods for accessing Tidal track information.
