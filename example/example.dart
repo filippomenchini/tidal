@@ -74,6 +74,14 @@ void main(List<String> args) async {
 
   print("${searchedArtists.items}\n");
 
+  // You can retrieve similar artists for a given artist.
+  final similarAritsts = await tidal.artist.getSimilarArtistsForGivenArtist(
+    id: jayz.id,
+    countryCode: "US",
+  );
+
+  print("$similarAritsts\n");
+
   // Make sure to dispose the client when you're done.
   tidal.dispose();
 }

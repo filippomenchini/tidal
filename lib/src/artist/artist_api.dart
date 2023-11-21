@@ -72,7 +72,7 @@ abstract class ArtistAPI {
   ///
   /// Returns:
   /// A [Future<List<String>>] representing the unique identifiers of similar artists.
-  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+  Future<List<String>> getSimilarArtistsForGivenArtist({
     required String id,
     required String countryCode,
     int offset = 0,
@@ -134,7 +134,7 @@ class ArtistAPIImpl implements ArtistAPI {
       ).then((result) => result.artists);
 
   @override
-  Future<List<String>> getSimilarAlbumsForGivenAlbum({
+  Future<List<String>> getSimilarArtistsForGivenArtist({
     required String id,
     required String countryCode,
     int offset = 0,
