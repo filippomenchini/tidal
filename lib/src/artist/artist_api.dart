@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:tidal/src/artist/get_similar_artist_for_given_artist.dart';
+import 'package:tidal/src/artist/get_similar_artists_for_given_artist.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -62,7 +62,7 @@ abstract class ArtistAPI {
     TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
   });
 
-  /// Retrieves a list of similar artists for a given album.
+  /// Retrieves a list of similar artists for a given artist.
   ///
   /// Parameters:
   /// - [id]: The unique identifier of the target artist.
@@ -140,7 +140,7 @@ class ArtistAPIImpl implements ArtistAPI {
     int offset = 0,
     int limit = 10,
   }) =>
-      getSimilarArtistsForGivenArtistsImpl(
+      getSimilarArtistsForGivenArtistImpl(
         client,
         tidalAuthToken: tidalAuthToken,
         id: id,

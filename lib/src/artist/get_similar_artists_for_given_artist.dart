@@ -8,7 +8,7 @@ const _getSimilarArtistsForGivenArtist = 'https://openapi.tidal.com/artists';
 const _acceptHeader = {'accept': 'application/vnd.tidal.v1+json'};
 const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 
-/// Retrieves a list of similar artists for a given album.
+/// Retrieves a list of similar artists for a given track.
 ///
 /// Parameters:
 /// - [id]: The unique identifier of the target artist.
@@ -18,7 +18,7 @@ const _contentTypeHeader = {'Content-Type': 'application/vnd.tidal.v1+json'};
 ///
 /// Returns:
 /// A [Future<List<String>>] representing the unique identifiers of similar artists.
-Future<List<String>> getSimilarArtistsForGivenArtistsImpl(
+Future<List<String>> getSimilarArtistsForGivenArtistImpl(
   http.Client client, {
   required TidalAuthToken tidalAuthToken,
   required String id,

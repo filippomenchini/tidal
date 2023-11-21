@@ -1,12 +1,12 @@
 import 'package:http/http.dart';
 import 'package:test/test.dart';
-import 'package:tidal/src/artist/get_similar_artists_for_given_artist.dart';
 import 'package:tidal/src/authorization/tidal_auth_token.dart';
 import 'package:http/testing.dart' as http_testing;
+import 'package:tidal/src/track/get_similar_tracks_for_given_track.dart';
 
 void main() {
-  group('Given an artist id and a contry code', () {
-    test('Should return an list of similar artist ids', () async {
+  group('Given an track id and a contry code', () {
+    test('Should return an list of similar track ids', () async {
       // Arrange
       String actualUrl = '';
       final client = http_testing.MockClient((request) async {
@@ -25,11 +25,11 @@ void main() {
       const id = '234815507';
       const countryCode = 'US';
       const expectedUrl =
-          'https://openapi.tidal.com/artists/234815507/similar?countryCode=US&offset=0&limit=10';
+          'https://openapi.tidal.com/tracks/234815507/similar?countryCode=US&offset=0&limit=10';
       final expectedResult = ['251380836'];
 
       // Act
-      final result = await getSimilarArtistsForGivenArtistImpl(
+      final result = await getSimilarTracksForGivenTrackImpl(
         client,
         tidalAuthToken: tidalAuthToken,
         id: id,

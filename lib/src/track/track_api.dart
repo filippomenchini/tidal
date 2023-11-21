@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:tidal/src/track/get_similar_tracks_for_given_track.dart';
 
 import '../authorization/tidal_auth_token.dart';
 import '../search/search_api.dart';
@@ -50,6 +51,23 @@ abstract class TrackAPI {
     int offset = 0,
     int limit = 10,
     TidalSearchPopularity popularity = TidalSearchPopularity.UNDEFINED,
+  });
+
+  /// Retrieves a list of similar tracks for a given track.
+  ///
+  /// Parameters:
+  /// - [id]: The unique identifier of the target track.
+  /// - [countryCode]: The country code for which the search is performed.
+  /// - [offset]: The index from which to start retrieving similar tracks (default is 0).
+  /// - [limit]: The maximum number of similar tracks to retrieve (default is 10).
+  ///
+  /// Returns:
+  /// A [Future<List<String>>] representing the unique identifiers of similar tracks.
+  Future<List<String>> getSimilarTracksForGivenTrack({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
   });
 }
 
@@ -106,4 +124,18 @@ class TrackAPIImpl implements TrackAPI {
         popularity: popularity,
         type: TidalSearchType.TRACKS,
       ).then((result) => result.tracks);
+
+  @override
+  Future<List<String>> getSimilarTracksForGivenTrack({
+    required String id,
+    required String countryCode,
+    int offset = 0,
+    int limit = 10,
+  }) =>
+      getSimilarTracksForGivenTrackImpl(
+        client,
+        tidalAuthToken: tidalAuthToken,
+        id: id,
+        countryCode: countryCode,
+      );
 }
