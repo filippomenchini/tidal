@@ -1,3 +1,9 @@
+## 0.3.0
+
+- Implemented "Get Similar albums for the given album" API.
+- Implemented "Get Similar artists for the given artist" API.
+- Implemented "Get Similar tracks for the given track" API.
+
 ## 0.2.1
 
 - Added missing docs on search enums.
